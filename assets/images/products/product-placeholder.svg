@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Product image placeholder</title>
+  <desc id="desc">A simple placeholder for Mbayom IT Point shop products.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ecfeff"/>
+      <stop offset="1" stop-color="#f8fafc"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect x="110" y="112" width="580" height="376" rx="28" fill="#ffffff" stroke="#cbd5e1" stroke-width="8"/>
+  <rect x="160" y="166" width="480" height="250" rx="18" fill="#f1f5f9"/>
+  <circle cx="282" cy="256" r="54" fill="#0f766e" opacity=".18"/>
+  <path d="M205 376l112-116 78 82 54-52 146 86H205z" fill="#0f766e" opacity=".28"/>
+  <path d="M336 454h128l22 58H314l22-58z" fill="#0f172a" opacity=".12"/>
+  <text x="400" y="535" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#0f766e">Product Image</text>
+</svg>

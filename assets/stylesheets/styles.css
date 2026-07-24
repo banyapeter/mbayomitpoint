@@ -1141,7 +1141,7 @@ section {background: var(--light-color);}
 # Call To Action Section
 --------------------------------------------------------------*/
 .call-to-action {
-  background: url(https://res.cloudinary.com/qgu6ln2v/image/upload/v1784906546/hero-bg_uta6mx.png) center left;
+  background: url(https://res.cloudinary.com/qgu6ln2v/image/upload/v1784907516/hero-bg_nowq3t.png) center left;
   background-size: cover;
   padding: 150px 0px;
   border-radius: 0px;
@@ -1594,7 +1594,7 @@ section {background: var(--light-color);}
 .hero {
   width: 100%;
   position: relative;
-  background: url(https://res.cloudinary.com/qgu6ln2v/image/upload/v1784906546/hero-bg_uta6mx.png) center center;
+  background: url(https://res.cloudinary.com/qgu6ln2v/image/upload/v1784907516/hero-bg_nowq3t.png) center center;
   background-size: cover;
   padding: 60px 0 0 0;
   height: 100vh;
@@ -1721,7 +1721,7 @@ section {background: var(--light-color);}
 
 @media (max-width: 991px) {
   .hero {
-    background: url(https://res.cloudinary.com/qgu6ln2v/image/upload/v1784906546/hero-bg_uta6mx.png) center center;
+    background: url(https://res.cloudinary.com/qgu6ln2v/image/upload/v1784907516/hero-bg_nowq3t.png) center center;
   }
   .hero h2 {
     font-size: 22px;
@@ -3428,7 +3428,7 @@ canvas{
 
 
 .footer-section {
-  background: url(https://res.cloudinary.com/qgu6ln2v/image/upload/v1784906546/hero-bg_uta6mx.png) center left;
+  background: url(https://res.cloudinary.com/qgu6ln2v/image/upload/v1784907516/hero-bg_nowq3t.png) center left;
   background-size: cover;
   padding: 60px 0;
   border-radius: 0px;

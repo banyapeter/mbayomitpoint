@@ -344,6 +344,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /** Blog post sharing */
+  const postTitle = document.querySelector('.single-page .title');
+  const postMeta = document.querySelector('.single-page .details-post-data');
+  if (postTitle && postMeta) {
+    const shareBox = document.createElement('div');
+    shareBox.className = 'post-share';
+    shareBox.innerHTML = `
+      <button class="post-share__trigger" type="button" aria-expanded="false" aria-haspopup="true"><i class="bi bi-share-fill" aria-hidden="true"></i><span>Share</span></button>
+      <div class="post-share__menu" aria-label="Share this article">
+        <button class="post-share__native" type="button"><i class="bi bi-send-fill" aria-hidden="true"></i> Share now</button>
+        <a class="post-share__link" data-share="whatsapp" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <a class="post-share__link" data-share="facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook" aria-hidden="true"></i> Facebook</a>
+        <a class="post-share__link" data-share="linkedin" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a>
+        <button class="post-share__copy" type="button"><i class="bi bi-link-45deg" aria-hidden="true"></i> Copy link</button>
+      </div>`;
+    postMeta.insertAdjacentElement('afterend', shareBox);
+
+    const trigger = shareBox.querySelector('.post-share__trigger');
+    const pageUrl = window.location.href;
+    const title = postTitle.textContent.trim() || document.title;
+    const encodedUrl = encodeURIComponent(pageUrl);
+    const encodedTitle = encodeURIComponent(title);
+    shareBox.querySelector('[data-share="whatsapp"]').href = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
+    shareBox.querySelector('[data-share="facebook"]').href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+    shareBox.querySelector('[data-share="linkedin"]').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+
+    const closeShareMenu = () => { shareBox.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); };
+    trigger.addEventListener('click', () => { const isOpen = shareBox.classList.toggle('is-open'); trigger.setAttribute('aria-expanded', String(isOpen)); });
+
+    shareBox.querySelector('.post-share__native').addEventListener('click', async () => {
+      if (navigator.share) {
+        try { await navigator.share({ title, url: pageUrl }); closeShareMenu(); } catch (error) { /* Dialog dismissed. */ }
+      } else { shareBox.querySelector('.post-share__copy').click(); }
+    });
+    shareBox.querySelector('.post-share__copy').addEventListener('click', async (event) => {
+      try { await navigator.clipboard.writeText(pageUrl); }
+      catch (error) {
+        const field = document.createElement('textarea'); field.value = pageUrl; document.body.appendChild(field); field.select(); document.execCommand('copy'); field.remove();
+      }
+      event.currentTarget.innerHTML = '<i class="bi bi-check2" aria-hidden="true"></i> Link copied';
+      setTimeout(() => { event.currentTarget.innerHTML = '<i class="bi bi-link-45deg" aria-hidden="true"></i> Copy link'; closeShareMenu(); }, 1600);
+    });
+    document.addEventListener('click', (event) => { if (!shareBox.contains(event.target)) closeShareMenu(); });
+  }
+
 
  const rtlButton = document.getElementById('rtl-button');
     const styleLink = document.getElementById('theme-style');

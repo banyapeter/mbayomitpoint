@@ -3631,3 +3631,14 @@ canvas{
 .footer-menu li a:hover {
   color: #000000;
 }
+
+/* Modern blog sharing control */
+.post-share { position: relative; display: inline-block; margin: 18px 0 26px; z-index: 2; }
+.post-share__trigger { display: inline-flex; align-items: center; gap: 9px; border: 0; border-radius: 999px; padding: 11px 18px; color: #fff; background: linear-gradient(135deg, var(--color-primary), #6d5dfc); box-shadow: 0 8px 20px rgba(70, 72, 229, .25); font: inherit; font-weight: 600; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+.post-share__trigger:hover, .post-share__trigger:focus-visible { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(70, 72, 229, .35); }
+.post-share__menu { position: absolute; top: calc(100% + 10px); right: 0; display: grid; min-width: 190px; padding: 8px; border: 1px solid rgba(110, 110, 130, .16); border-radius: 14px; background: #fff; box-shadow: 0 16px 40px rgba(20, 20, 45, .18); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .18s ease, transform .18s ease, visibility .18s; }
+.post-share.is-open .post-share__menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.post-share__menu a, .post-share__menu button { display: flex; align-items: center; gap: 10px; width: 100%; border: 0; border-radius: 9px; padding: 10px 11px; color: var(--color-default); background: transparent; font: inherit; font-size: 14px; text-align: right; text-decoration: none; cursor: pointer; }
+.post-share__menu a:hover, .post-share__menu button:hover, .post-share__menu a:focus-visible, .post-share__menu button:focus-visible { color: var(--color-primary); background: rgba(109, 93, 252, .08); }
+.post-share__menu i { width: 16px; color: var(--color-primary); text-align: center; }
+@media (max-width: 575px) { .post-share { margin-bottom: 22px; } .post-share__menu { min-width: 180px; } }

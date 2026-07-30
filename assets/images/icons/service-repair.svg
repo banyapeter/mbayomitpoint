@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Repair and maintenance</title>
+  <defs>
+    <linearGradient id="repair-gradient" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4c7dff"/>
+      <stop offset="1" stop-color="#025add"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="27" fill="#e8f0ff"/>
+  <path fill="url(#repair-gradient)" d="M47.8 17.9a12.2 12.2 0 0 0-13.4 16.8L19.1 50a4.5 4.5 0 1 0 6.4 6.4l15.3-15.3a12.2 12.2 0 0 0 16.8-13.4l-7 7-5.4-1.4-1.4-5.4zm-25.5 36a1.5 1.5 0 1 1-2.1-2.1 1.5 1.5 0 0 1 2.1 2.1z"/>
+  <path fill="#fff" d="M43.2 20.5a8.1 8.1 0 0 1 8.7 1.7l-5.4 5.4 1.3 5 5 1.3 5.4-5.4a8.1 8.1 0 0 1-1.7 8.7 8.3 8.3 0 0 1-11.8.1l-1.4-1.4-19.9 19.9a1.5 1.5 0 0 1-2.1-2.1l19.9-19.9-1.4-1.4a8.3 8.3 0 0 1 .1-11.8 8.1 8.1 0 0 1 2.3-1.7z" opacity=".25"/>
+</svg>

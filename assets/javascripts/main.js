@@ -103,6 +103,30 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('scroll', navbarlinksActive);
 
   /**
+   * Keep the current page highlighted in the site navigation.
+   * This complements the scroll-based state above for normal page links.
+   */
+  function markCurrentNavLink() {
+    const currentPage = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+
+    navbarlinks.forEach((navbarlink) => {
+      const href = navbarlink.getAttribute('href');
+      if (!href || href.startsWith('#') || /^(https?:|mailto:|tel:)/i.test(href)) return;
+
+      const linkPage = href.split('#')[0].split('/').pop().toLowerCase();
+      if (linkPage !== currentPage) return;
+
+      navbarlink.classList.add('active');
+      const dropdown = navbarlink.closest('.dropdown');
+      if (dropdown) {
+        const dropdownToggle = dropdown.querySelector(':scope > a');
+        if (dropdownToggle) dropdownToggle.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('load', markCurrentNavLink);
+
+  /**
    * Mobile nav toggle
    */
   const mobileNavShow = document.querySelector('.mobile-nav-show');

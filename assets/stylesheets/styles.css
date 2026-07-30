@@ -644,6 +644,10 @@ section {background: var(--light-color);}
     color: var(--color-primary);
   }
 
+  .navbar .dropdown > a.active {
+    color: var(--color-primary);
+  }
+
   .navbar .dropdown ul {
     display: block;
     position: absolute;
@@ -770,6 +774,12 @@ section {background: var(--light-color);}
   .navbar .active:focus,
   .navbar li:hover>a {
     color: #fff;
+  }
+
+  .navbar a.active,
+  .navbar .dropdown > a.active {
+    background: rgba(255, 255, 255, 0.16);
+    border-left: 3px solid #fff;
   }
 
   .navbar .getstarted,

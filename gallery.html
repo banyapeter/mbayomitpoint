@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zxx">
+  
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Mbayom IT-Point Global Solutions</title>
+  <meta content="" name="Mbayom IT-Point Global Solutions">
+  <meta name="description" content="Mbayom IT-Point Global Solutions">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta content="" name="Mbayom IT-Point Global Solutions">
+
+  <!-- Favicons -->
+  <link href="https://res.cloudinary.com/qgu6ln2v/image/upload/v1783611300/favicon_a77xin.png" rel="icon">
+  <link href="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785337265/apple-touch-icon_anlh8p.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="../../../../fonts.googleapis.com/css2e4eb.css?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&amp;family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+  <link rel="preconnect" href="../../../../fonts.googleapis.com/index.html">
+  <link rel="preconnect" href="../../../../fonts.gstatic.com/index.html" crossorigin="">
+  <link href="../../../../fonts.googleapis.com/css26e96.css?family=Oswald:wght@500&amp;display=swap" rel="stylesheet">
+  <link href="../../../../fonts.googleapis.com/css2f2bf.css?family=Poppins:wght@300;400&amp;display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/stylesheets/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <!-- Main CSS File -->
+  <link href="assets/stylesheets/styles.css" id="theme-style" rel="stylesheet">
+  <style>
+    .gallery-showcase { padding: 90px 0; background: #f7f9fc; }
+    .gallery-intro { max-width: 650px; margin: 0 auto 42px; text-align: center; }
+    .gallery-kicker { color: #0d6efd; font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .gallery-intro h1 { color: #172033; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin: 10px 0 14px; }
+    .gallery-intro p { color: #62708a; font-size: 1.05rem; line-height: 1.7; margin: 0; }
+    .gallery-filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+    .gallery-filter { background: #fff; border: 1px solid #e0e6ef; border-radius: 999px; color: #53617a; cursor: pointer; font-weight: 700; padding: 10px 18px; transition: .25s ease; }
+    .gallery-filter:hover, .gallery-filter.is-active { background: #0d6efd; border-color: #0d6efd; color: #fff; box-shadow: 0 8px 18px rgba(13,110,253,.22); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+    .gallery-card { grid-column: span 4; background: #fff; border-radius: 18px; box-shadow: 0 10px 35px rgba(30,48,80,.08); min-height: 270px; overflow: hidden; position: relative; transition: transform .3s ease, box-shadow .3s ease; }
+    .gallery-card.is-wide { grid-column: span 8; }
+    .gallery-card:hover { box-shadow: 0 20px 45px rgba(30,48,80,.18); transform: translateY(-7px); }
+    .gallery-card[hidden] { display: none; }
+    .gallery-card img { height: 100%; inset: 0; object-fit: cover; position: absolute; width: 100%; }
+    .gallery-card::after { background: linear-gradient(180deg, transparent 35%, rgba(9,20,40,.9)); content: ''; inset: 0; position: absolute; }
+    .gallery-card-content { bottom: 0; color: #fff; left: 0; padding: 28px; position: absolute; right: 0; z-index: 1; }
+    .gallery-card-content span { color: #a7d0ff; font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .gallery-card-content h3 { color: #fff; font-size: 1.25rem; margin: 7px 0 0; }
+    .gallery-view { align-items: center; background: #fff; border: 0; border-radius: 50%; color: #0d6efd; display: flex; height: 44px; justify-content: center; opacity: 0; position: absolute; right: 20px; top: 20px; transform: translateY(-8px); transition: .25s ease; width: 44px; z-index: 2; }
+    .gallery-card:hover .gallery-view { opacity: 1; transform: translateY(0); }
+    .gallery-empty { color: #62708a; display: none; padding: 32px; text-align: center; }
+    @media (max-width: 991px) { .gallery-card, .gallery-card.is-wide { grid-column: span 6; } }
+    @media (max-width: 575px) { .gallery-showcase { padding: 60px 0; } .gallery-grid { gap: 14px; } .gallery-card, .gallery-card.is-wide { grid-column: span 12; min-height: 250px; } .gallery-card-content { padding: 22px; } }
+  </style>
+
+
+</head>
+
+<body>
+
+  <header id="header" class="header d-flex align-items-center sticked stikcy-menu">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1783613478/mbayomlogo_s5tf7w.png" alt="logo">
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html" class="">Home</a></li>
+          <li><a href="services.html" class="">Services</a></li>
+          <li><a href="shop.html" class="">Shop</a></li>
+          <li><a href="testimonials.html" class="">Testimonials</a></li>
+          <!-- <li><a href="team.html" class="">Team</a></li>-->
+          <li class="dropdown"><a href="#"><span>Menu</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="about.html">About</a></li>
+              <!--<li><a href="packages.html">Pricing</a></li> -->
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="terms.html">Terms &amp; Conditions</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+              <!-- <li><a href="blogs.html">Blogs</a></li>-->
+              <!-- <li><a href="blog-details.html">Blog Detail Page</a></li>-->
+            </ul>
+          </li>
+          <li><a href="blogs.html">News</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+      <a href="contact.html" class="btn-get-started hide-on-mobile">Get Quotes</a>
+      <button id="darkmode-button"><i class="bi bi-moon-fill"></i></button>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+    </div>
+    <div id="rtl-button" style="cursor: pointer;">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="rtl-label">RTL</span>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <!--  Breadcrumbs  -->
+  <div class="breadcrumbs">
+    <div class="page-header d-flex align-items-center">
+      <div class="container position-relative">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2>Our Gallery</h2>
+            <p>Check out our latest work and projects</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <div class="container">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>Our Gallery</li>
+        </ol>
+      </div>
+    </nav>
+  </div><!-- End Breadcrumbs -->
+
+  <main id="main">
+    <section class="gallery-showcase" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="gallery-intro" data-aos="fade-up">
+          <!-- <span class="gallery-kicker">Our Work</span> <span class="gallery-kicker">Mbayom IT-Point</span>-->
+          <h3 id="gallery-title">Work that makes a difference.</h3>
+          <p>A glimpse into the technology, teams, training and solutions we deliver for our clients.</p>
+        </div>
+
+        <div class="gallery-filters" role="group" aria-label="Filter gallery" data-aos="fade-up" data-aos-delay="100">
+          <button class="gallery-filter is-active" type="button" data-filter="all">All work</button>
+          <button class="gallery-filter" type="button" data-filter="projects">Projects</button>
+          <button class="gallery-filter" type="button" data-filter="training">Training</button>
+          <button class="gallery-filter" type="button" data-filter="events">Repairs</button>
+        </div>
+
+        <!-- Replace each image URL below with your own project photographs when ready. -->
+        <div class="gallery-grid" id="gallery-grid">
+          <article class="gallery-card" data-category="projects" data-aos="fade-up">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412599/AP_installation_zoojjw.jpg?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="AP installation">
+            <button class="gallery-view" type="button" aria-label="View AP installation" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412599/AP_installation_zoojjw.jpg?auto=format&amp;fit=crop&amp;w=1800&amp;q=90" data-title="AP installation"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>AP Installation</h3></div>
+          </article>
+          <article class="gallery-card" data-category="projects" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412596/ISP_lz6usu.jpg?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Airtel installation">
+            <button class="gallery-view" type="button" aria-label="View Airtel installation" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412596/ISP_lz6usu.jpg?auto=format&amp;fit=crop&amp;w=1800&amp;q=90" data-title="Airtel installation"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Airtel Installation</h3></div>
+          </article>
+          <article class="gallery-card" data-category="projects" data-aos="fade-up">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412578/starlink_mounting_r7yyaz.jpg?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Starlink installation">
+            <button class="gallery-view" type="button" aria-label="View Starlink installation" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412578/starlink_mounting_r7yyaz.jpg?auto=format&amp;fit=crop&amp;w=1800&amp;q=90" data-title="Starlink installation"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Starlink Installation</h3></div>
+          </article>
+          <article class="gallery-card" data-category="projects" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412578/Rack_installation_x1l8gx.jpg?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Network hardware installation">
+            <button class="gallery-view" type="button" aria-label="View Network installation" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412578/Rack_installation_x1l8gx.jpg?auto=format&amp;fit=crop&amp;w=1800&amp;q=90" data-title="Network installation"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Network Installation</h3></div>
+          </article>
+          <article class="gallery-card" data-category="projects" data-aos="fade-up">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412578/Crimping_zl3fu2.jpg?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Crimping and Networking">
+            <button class="gallery-view" type="button" aria-label="View Crimping and Networking" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412578/Crimping_zl3fu2.jpg?auto=format&amp;fit=crop&amp;w=1800&amp;q=90" data-title="Crimping and Networking"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Crimping and Networking</h3></div>
+          </article>
+          
+          <article class="gallery-card" data-category="training" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412578/training_x3rjnm.jpg?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Technology training session">
+            <button class="gallery-view" type="button" aria-label="View Technology training" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412578/training_x3rjnm.jpg?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" data-title="Technology training"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Training</span><h3>Technology Training</h3></div>
+          </article>
+          <article class="gallery-card" data-category="training" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785415574/mbayom_trainning_vtnlel.jpg?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Technology training session">
+            <button class="gallery-view" type="button" aria-label="View Technology training" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785415574/mbayom_trainning_vtnlel.jpg?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" data-title="Technology training"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Training</span><h3>Technology Training</h3></div>
+          </article>
+          <article class="gallery-card" data-category="events" data-aos="fade-up">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412598/System_Repair_zskadf.jpg?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Business technology event">
+            <button class="gallery-view" type="button" aria-label="View Community event" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412598/System_Repair_zskadf.jpg?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" data-title="Community event"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Repairs</span><h3>System Repairs</h3></div>
+          </article>
+          <article class="gallery-card" data-category="projects" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1784982555/mbayom_hotel_pos_ubbgeg.jpg?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Team working on software project">
+            <button class="gallery-view" type="button" aria-label="View Software deployment" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1784982555/mbayom_hotel_pos_ubbgeg.jpg?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" data-title="Software deployment"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Software Deployment</h3></div>
+          </article>
+           <article class="gallery-card" data-category="projects" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1784982554/software_installation_POS_ddr0gl.jpg?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Team working on software project">
+            <button class="gallery-view" type="button" aria-label="View Software deployment" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1784982554/software_installation_POS_ddr0gl.jpg?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" data-title="Software deployment"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Software Deployment</h3></div>
+          </article>
+           <article class="gallery-card" data-category="projects" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412599/Software_fmpc9a.jpg?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Team working on software project">
+            <button class="gallery-view" type="button" aria-label="View Software deployment" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785412599/Software_fmpc9a.jpg?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" data-title="Software deployment"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Software Deployment</h3></div>
+          </article>
+            <article class="gallery-card" data-category="projects" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785415575/mbayom_odoo_gqldtb.jpg?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Team working on software project">
+            <button class="gallery-view" type="button" aria-label="View Software deployment" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785415575/mbayom_odoo_gqldtb.jpg?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" data-title="Software deployment"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Software Deployment</h3></div>
+          </article>
+          <article class="gallery-card" data-category="projects" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785415574/mbayom_aronium_rzqxve.jpg?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Team working on software project">
+            <button class="gallery-view" type="button" aria-label="View Software deployment" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785415574/mbayom_aronium_rzqxve.jpg?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" data-title="Software deployment"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Software Deployment</h3></div>
+          </article>
+          <article class="gallery-card" data-category="projects" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785415574/software_odoo_deploy_lu1zus.jpg?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Team working on software project">
+            <button class="gallery-view" type="button" aria-label="View Software deployment" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1785415574/software_odoo_deploy_lu1zus.jpg?auto=format&amp;fit=crop&amp;w=1600&amp;q=90" data-title="Software deployment"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Software Deployment</h3></div>
+          </article>
+          <article class="gallery-card" data-category="projects" data-aos="fade-up" data-aos-delay="80">
+            <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1784982555/starlink_gkiai0.jpg?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Starlink installation">
+            <button class="gallery-view" type="button" aria-label="View Starlink installation" data-image="https://res.cloudinary.com/qgu6ln2v/image/upload/v1784982555/starlink_gkiai0.jpg?auto=format&amp;fit=crop&amp;w=1800&amp;q=90" data-title="Starlink installation"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Projects</span><h3>Starlink Roof Mounting</h3></div>
+          </article>
+          <!--  
+          <article class="gallery-card is-wide" data-category="training" data-aos="fade-up">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&amp;fit=crop&amp;w=1400&amp;q=85" alt="Professional business consultation">
+            <button class="gallery-view" type="button" aria-label="View Client consultation" data-image="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&amp;fit=crop&amp;w=1800&amp;q=90" data-title="Client consultation"><i class="bi bi-arrows-fullscreen"></i></button>
+            <div class="gallery-card-content"><span>Training</span><h3>Client-focused consultation</h3></div>
+          </article>-->
+        </div>
+        <p class="gallery-empty" id="gallery-empty">No gallery items in this category yet.</p>
+      </div>
+    </section>
+  </main><!-- End #main -->
+
+  <!--  Footer  -->
+  <footer id="footer" class="footer-section">
+    <div class="container">
+        <div class="footer-content pt-5 pb-5">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 mb-50">
+                    <div class="footer-widget">
+                        <div class="footer-logo">
+                            <a href="index.html" class="logo d-flex align-items-center">
+                              <img src="https://res.cloudinary.com/qgu6ln2v/image/upload/v1783613478/mbayomlogo_s5tf7w.png" alt="logo">
+                            </a>
+                        </div>
+                        <div class="footer-text">
+                            <p>Our areas of expertise include web application development, software installation, Training, web hosting management, 
+                              network installation, system and thermal printer repairs, and brand consultancy.</p>
+                        </div>
+                        <div class="footer-social-icon">
+                            <span>Follow us</span>
+                             <a href="https://www.facebook.com/profile.php?id=61590350842567"><i class="bi bi-facebook"></i></a>
+                             <a href="https://www.instagram.com/mbayom_it_point?igsh=MWdpOXFwczc1dGh0aQ=="><i class="bi bi-instagram"></i></a>
+                             <a href="https://www.youtube.com/@mbayomit-point"><i class="bi bi-youtube"></i></a>
+                             <a href="#"><i class="bi bi-twitter-x"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
+                      <div class="service-widget footer-widget">
+                        <div class="footer-widget-heading">
+                            <h3>Services</h3>
+                        </div>
+                          <ul class="list">
+                              <li><a href="services.html">App Developemnt</a></li>
+                              <li><a href="services.html">Cloud Services</a></li>
+                              <li><a href="services.html">Domain and Hosting</a></li>
+                              <li><a href="services.html">Network Installation and Maintenance</a></li>
+                              <li><a href="services.html">System Repairs and Upgrade</a></li>
+                              <li><a href="services.html">90% Tech Support</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
+                      <div class="service-widget footer-widget">
+                        <div class="footer-widget-heading">
+                            <h3>Information</h3>
+                        </div>
+                          <ul class="list">
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="shop.html">Shop</a></li>
+                            <li><a href="faq.html">FAQs</a></li>
+                            <li><a href="team.html">Team</a></li>
+                            <li><a href="blogs.html">Blogs</a></li>
+                            <!--<li><a href="blogs-details.html">Blog Details</a></li>-->
+                            <!--<li><a href="coming-soon.html">Coming Soon</a></li> -->
+                            <li><a href="terms.html">Terms & Conditions</a></li>
+                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                    <div class="contact-widget footer-widget">
+                        <div class="footer-widget-heading">
+                            <h3>Contacts</h3>
+                        </div>
+                          <div class="footer-text">
+                              <p><i class="bi bi-geo-alt-fill mr-15"></i> Old Banex Plaza Wuse 2, Abuja</p>
+                              <p><i class="bi bi-telephone-inbound-fill mr-15"></i> +234 815 811 5339</p>
+                              <p><i class="bi bi-envelope-fill mr-15"></i> mbayomitpointglobal@gmail.com</p>
+                          </div>
+                    </div>
+                    <div class="footer-widget">
+                        <div class="footer-widget-heading">
+                            <h3>Newsletter</h3>
+                        </div>
+                        <div class="footer-text mb-25">
+                            <p>Don't miss to subscribe to our new feeds, kindly fill the form below.</p>
+                        </div>
+                        <div class="controls">
+                          <div class="subscribe-form">
+                            <form action="https://formspree.io/f/movlrzqq" method="POST" id="my-newsletter-form" >
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required="required" data-error="Valid email is required.">
+                                <button type="submit" data-set="Send Message" id="statuss" id="errors"><i class="bi bi-telegram"></i></button>
+                            </form>
+
+                            <script>
+                              function redirectAfterSubmit(event) {//not done
+                                event.preventDefault(); // Prevent the default form submission-- onsubmit="redirectAfterSubmit(event)"
+                                window.location.href = "newslettersub.html"; // Redirect to another page
+                              }
+                            </script>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 text-left text-lg-left">
+                    <div class="copyright-text">
+                        <p>Copyright © 2026 - Designed by <a href="#">Mbayom IT-Point</a>. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- WhatsApp Help Button -->
+    <a class='whatsapp-button' href='https://wa.me/2348158115339' target='_blank' title='Need Help? Chat on WhatsApp'>
+        <svg class='whatsapp-icon' viewBox='0 0 24 24'>
+            <path d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488'/>
+        </svg>
+    </a>
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center active">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/javascripts/jquery.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/javascripts/plugins.js"></script>
+  <script src="assets/javascripts/purecounter_vanilla.js"></script>
+  <script src="assets/javascripts/validator.min.js"></script>
+  <script src="assets/javascripts/contactform.js"></script>
+  <script src="assets/javascripts/particles.min.js"></script>
+  <script src="assets/javascripts/script.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/javascripts/main.js"></script>
+  <script>
+    const filters = document.querySelectorAll('.gallery-filter');
+    const cards = document.querySelectorAll('.gallery-card');
+    const emptyState = document.getElementById('gallery-empty');
+
+    filters.forEach((filter) => filter.addEventListener('click', () => {
+      const category = filter.dataset.filter;
+      let visible = 0;
+      filters.forEach((item) => item.classList.toggle('is-active', item === filter));
+      cards.forEach((card) => {
+        const show = category === 'all' || card.dataset.category === category;
+        card.hidden = !show;
+        if (show) visible += 1;
+      });
+      emptyState.style.display = visible ? 'none' : 'block';
+    }));
+
+    document.querySelectorAll('.gallery-view').forEach((button) => button.addEventListener('click', () => {
+      GLightbox({ elements: [{ href: button.dataset.image, type: 'image', title: button.dataset.title }] }).open();
+    }));
+  </script>
+
+
+
+</body>
+
+</html>

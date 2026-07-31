@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
   
 <head>
   <meta charset="utf-8">
@@ -30,6 +30,45 @@
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <!-- Main CSS File -->
   <link href="assets/stylesheets/styles.css" id="theme-style" rel="stylesheet">
+  <style>
+    .appointment-section { padding: 88px 0; background: var(--light-color); }
+    .appointment-intro { max-width: 610px; margin-bottom: 34px; }
+    .appointment-kicker { display: inline-flex; align-items: center; gap: 8px; color: var(--color-primary); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .appointment-kicker i { font-size: 17px; }
+    .appointment-intro h1 { color: var(--text-color); font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; margin: 12px 0; }
+    .appointment-intro p { color: var(--text-grey-color); font-size: 16px; line-height: 1.7; margin: 0; }
+    .visit-panel { position: sticky; top: 105px; color: #fff; padding: 38px 32px; border-radius: 18px; background: linear-gradient(145deg, #801b1a, var(--color-primary)); box-shadow: 0 18px 45px rgba(115, 23, 22, .24); overflow: hidden; }
+    .visit-panel:after { content: ''; position: absolute; right: -88px; bottom: -105px; width: 230px; height: 230px; border: 32px solid rgba(255,255,255,.1); border-radius: 50%; }
+    .visit-panel > * { position: relative; z-index: 1; }
+    .visit-panel h2 { font-size: 25px; font-weight: 700; margin-bottom: 12px; }
+    .visit-panel > p { color: rgba(255,255,255,.84); line-height: 1.7; margin-bottom: 25px; }
+    .visit-points { padding: 0; margin: 0; list-style: none; }
+    .visit-points li { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0; border-top: 1px solid rgba(255,255,255,.16); font-size: 14px; }
+    .visit-points i { color: #fff; font-size: 17px; }
+    .appointment-card { background: var(--theme-color-dark); padding: 36px; border: 1px solid var(--border-color); border-radius: 18px; box-shadow: 0 14px 38px var(--box-shadow-color); }
+    .appointment-card h2 { font-size: 23px; color: var(--text-color); font-weight: 700; margin: 0 0 5px; }
+    .appointment-card .form-note { color: var(--text-grey-color); font-size: 14px; margin-bottom: 27px; }
+    .appointment-card label { display: block; margin-bottom: 8px; color: var(--text-color); font-size: 13px; font-weight: 600; }
+    .appointment-card .form-group { margin-bottom: 21px; }
+    .appointment-card .form-control, .appointment-card .form-select { width: 100%; min-height: 50px; color: var(--text-color); border: 1px solid var(--border-color); border-radius: 9px; background: var(--light-color); padding: 12px 14px; transition: border-color .2s, box-shadow .2s; }
+    .appointment-card textarea.form-control { min-height: 130px; resize: vertical; }
+    .appointment-card .form-control:focus, .appointment-card .form-select:focus { color: var(--text-color); background: var(--light-color); border-color: var(--color-primary); box-shadow: 0 0 0 .2rem rgba(182, 34, 32, .13); }
+    .service-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .service-option { position: relative; }
+    .service-option input { position: absolute; opacity: 0; pointer-events: none; }
+    .service-option label { height: 100%; display: flex; align-items: center; gap: 9px; margin: 0; padding: 12px; cursor: pointer; border: 1px solid var(--border-color); border-radius: 9px; background: var(--light-color); color: var(--text-color); font-weight: 500; transition: .2s; }
+    .service-option input:checked + label { border-color: var(--color-primary); color: var(--color-primary); background: rgba(182,34,32,.06); box-shadow: inset 0 0 0 1px var(--color-primary); }
+    .service-option i { font-size: 17px; }
+    .appointment-submit { width: 100%; min-height: 52px; border: 0; border-radius: 9px; color: #fff; background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); font-weight: 700; transition: transform .2s, box-shadow .2s; }
+    .appointment-submit:hover { color: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(12,109,224,.22); }
+    .privacy-note { color: var(--text-grey-color); font-size: 12px; line-height: 1.5; margin: 15px 0 0; text-align: center; }
+    .appointment-status { display: none; margin-top: 18px; padding: 13px 15px; border-radius: 8px; font-size: 14px; }
+    .appointment-status.is-visible { display: block; }
+    .appointment-status.is-success { color: #0f5132; background: #d1e7dd; }
+    .appointment-status.is-error { color: #842029; background: #f8d7da; }
+    @media (max-width: 991px) { .visit-panel { position: relative; top: auto; margin-bottom: 30px; } }
+    @media (max-width: 575px) { .appointment-section { padding: 58px 0; } .appointment-card, .visit-panel { padding: 26px 20px; } .service-options { grid-template-columns: 1fr; } }
+  </style>
 
 
 </head>
@@ -63,7 +102,6 @@
         </ul>
       </nav><!-- .navbar -->
       <a href="contact.html" class="btn-get-started hide-on-mobile">Get Quotes</a>
-      <a href="appointment.html" class="btn-get-started hide-on-mobile">Book a Visit</a>
       <button id="darkmode-button"><i class="bi bi-moon-fill"></i></button>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
@@ -84,9 +122,8 @@
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Contact Us</h2>
-            <p>We’d love to hear from you! Whether you have questions, feedback, 
-              or just want to say hello, feel free to reach out.</p>
+            <h2>Book a Tech Visit</h2>
+            <p>Schedule on-site help for your hospitality software, business systems, or network.</p>
           </div>
         </div>
       </div>
@@ -95,113 +132,99 @@
       <div class="container">
         <ol>
           <li><a href="index.html">Home</a></li>
-          <li>Contact Us</li>
+          <li>Book a Tech Visit</li>
         </ol>
       </div>
     </nav>
   </div><!-- End Breadcrumbs -->
 
   <main id="main">
-
-    <div class="single-page">
-     <!-- Start Contact Section -->
-    <div id="contact" class="contact-section section">
-      <div class="section-header">
-        <h2>Contact Us</h2>
-        <p>What can i do for you?</p>
-      </div>
+    <section class="appointment-section">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-12" data-aos="fade-right">
-            <div class="contact-information-box-3">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="single-contact-info-box">
-                    <div class="contact-info">
-                      <h6>Address:</h6>
-                      <p>Old Banex Plaza Wuse 2</p>
-                      <p>Abuja, FCT.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="single-contact-info-box">
-                    <div class="contact-info">
-                      <h6>Phone:</h6>
-                      <p>+234 8158 115 339</p>
-                      <p>+234 7087 495 021</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="single-contact-info-box">
-                    <div class="contact-info">
-                      <h6>Email:</h6>
-                      <p>mbayomitpointglobal@gmail.com</p>
-                      <p>support@mbayomitpoint.com.ng</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="appointment-intro" data-aos="fade-up">
+          <span class="appointment-kicker"><i class="bi bi-calendar2-check"></i> On-site technical support</span>
+          <h1>Let’s get your business running smoothly.</h1>
+          <p>Tell us what needs attention and choose a preferred time. Our technician will confirm your appointment before visiting.</p>
+        </div>
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-4" data-aos="fade-right">
+            <aside class="visit-panel">
+              <h2>What we can help with</h2>
+              <p>From point-of-sale software to reliable connectivity, our team is ready to support your business.</p>
+              <ul class="visit-points">
+                <li><i class="bi bi-check2-circle"></i><span>SambaPOS setup, repairs, training and integrations</span></li>
+                <li><i class="bi bi-check2-circle"></i><span>Aronium POS installation, configuration and support</span></li>
+                <li><i class="bi bi-check2-circle"></i><span>Odoo business management and Mbayom Hospitality Software</span></li>
+                <li><i class="bi bi-check2-circle"></i><span>Network, Wi-Fi, printer and connectivity issues</span></li>
+              </ul>
+            </aside>
           </div>
-          <div class="col-lg-8 col-md-12" data-aos="fade-left">
-            <div class="contact-form-box contact-form contact-form-3">
-              <div class="form-container-box">
-                <form class="contact-form form" method="post" action="https://formspree.io/f/xgvzpdey" id="my-form">
-                  <div class="controls">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group form-input-box">
-                          <input type="text" class="form-control" id="name" name="name" placeholder="Name*"
-                            required="required" data-error="Name is required.">
-                          <div class="help-block with-errors"></div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group form-input-box">
-                          <input type="email" class="form-control" id="email" name="email" placeholder="Email*"
-                            required="required" data-error="Valid email is required.">
-                          <div class="help-block with-errors"></div>
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group form-input-box">
-                          <input type="text" class="form-control" name="subject" placeholder="Subject"
-                            required="required">
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="form-group form-input-box">
-                          <textarea class="form-control" id="message" name="message" rows="7"
-                            placeholder="Write Your Message*" required="required"
-                            data-error="Please, leave us a message."></textarea>
-                          <div class="help-block with-errors"></div>
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <button type="submit" data-text="Send Message" id="status" id="error">Send Message</button>
-                      </div>
-                      <div class="messages">
-                        <div>
-                          <!--class="alert alert alert-success alert-dismissable alert-dismissable hidden"
-                          id="msgSubmit"
-                          <button type="button" class="close" data-dismiss="alert"
-                            aria-hidden="true">&times;</button> Thank You! your message has been sent. </div>
-                            -->
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
+          <div class="col-lg-8" data-aos="fade-left">
+            <div class="appointment-card">
+              <h2>Request an appointment</h2>
+              <p class="form-note">Fields marked with * are required.</p>
+              <form id="appointment-form" action="https://formspree.io/f/xgvzpdey" method="POST">
+                <input type="hidden" name="_subject" value="New Tech Visit Appointment Request">
+                <div class="row">
+                  <div class="col-md-6"><div class="form-group"><label for="full-name">Full Name *</label><input class="form-control" id="full-name" name="full_name" type="text" autocomplete="name" required></div></div>
+                  <div class="col-md-6"><div class="form-group"><label for="business-name">Business Name *</label><input class="form-control" id="business-name" name="business_name" type="text" required></div></div>
+                  <div class="col-md-6"><div class="form-group"><label for="phone">Phone Number *</label><input class="form-control" id="phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. +234 800 000 0000" required></div></div>
+                  <div class="col-md-6"><div class="form-group"><label for="email">Email Address</label><input class="form-control" id="email" name="email" type="email" autocomplete="email"></div></div>
+                  <div class="col-12"><div class="form-group"><label for="address">Visit Address *</label><input class="form-control" id="address" name="visit_address" type="text" placeholder="Building, street, area and city" required></div></div>
+                  <div class="col-12"><div class="form-group"><label>What do you need help with? *</label><div class="service-options">
+                    <div class="service-option"><input id="sambapos" name="service" type="radio" value="SambaPOS" required><label for="sambapos"><i class="bi bi-shop"></i>SambaPOS</label></div>
+                    <div class="service-option"><input id="aronium" name="service" type="radio" value="Aronium POS"><label for="aronium"><i class="bi bi-receipt"></i>Aronium POS</label></div>
+                    <div class="service-option"><input id="odoo" name="service" type="radio" value="Odoo"><label for="odoo"><i class="bi bi-boxes"></i>Odoo</label></div>
+                    <div class="service-option"><input id="hospitality" name="service" type="radio" value="Mbayom Hospitality Software"><label for="hospitality"><i class="bi bi-building"></i>Mbayom Hospitality</label></div>
+                    <div class="service-option"><input id="network" name="service" type="radio" value="Network / Wi-Fi"><label for="network"><i class="bi bi-router"></i>Network / Wi-Fi</label></div>
+                    <div class="service-option"><input id="other" name="service" type="radio" value="Other technical support"><label for="other"><i class="bi bi-tools"></i>Other tech support</label></div>
+                  </div></div></div>
+                  <div class="col-md-6"><div class="form-group"><label for="date">Preferred Date *</label><input class="form-control" id="date" name="preferred_date" type="date" required></div></div>
+                  <div class="col-md-6"><div class="form-group"><label for="time">Preferred Time *</label><select class="form-select" id="time" name="preferred_time" required><option value="" selected disabled>Select a time</option><option>9:00 AM – 11:00 AM</option><option>11:00 AM – 1:00 PM</option><option>1:00 PM – 3:00 PM</option><option>3:00 PM – 5:00 PM</option></select></div></div>
+                  <div class="col-md-6"><div class="form-group"><label for="urgency">How urgent is it? *</label><select class="form-select" id="urgency" name="urgency" required><option value="" selected disabled>Select urgency</option><option>Critical — business is interrupted</option><option>High — needs attention today</option><option>Normal — schedule a visit</option></select></div></div>
+                  <div class="col-md-6"><div class="form-group"><label for="contact-method">Best Contact Method</label><select class="form-select" id="contact-method" name="preferred_contact"><option>Phone call</option><option>WhatsApp</option><option>Email</option></select></div></div>
+                  <div class="col-12"><div class="form-group"><label for="issue">Describe the Issue *</label><textarea class="form-control" id="issue" name="issue_description" placeholder="Please include error messages, affected devices, when the issue began, and anything you have already tried." required></textarea></div></div>
+                  <div class="col-12"><button class="appointment-submit" type="submit">Request a Tech Visit <i class="bi bi-arrow-right ms-1"></i></button><p class="privacy-note">We’ll use your details only to arrange this appointment and provide support.</p><div class="appointment-status" id="appointment-status" role="status" aria-live="polite"></div></div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-        <div><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31520.73127694386!2d7.319838368368636!3d9.055426534889072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e7426abf3bc03%3A0xee14608fd5a1552!2s900106%2C%20Idu%2C%20Federal%20Capital%20Territory!5e0!3m2!1sen!2sng!4v1687000465148!5m2!1sen!2sng" width="1000" height="450" style="border:0;" float="center" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
       </div>
-    </div>
-    <!-- End Contact Section -->
-    
+    </section>
+
+    <script>
+      const appointmentForm = document.getElementById('appointment-form');
+      const appointmentStatus = document.getElementById('appointment-status');
+
+      appointmentForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const submitButton = appointmentForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.innerHTML = 'Sending request...';
+        appointmentStatus.className = 'appointment-status';
+
+        try {
+          const response = await fetch(appointmentForm.action, {
+            method: 'POST',
+            body: new FormData(appointmentForm),
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (!response.ok) throw new Error('Form submission failed');
+
+          appointmentForm.reset();
+          appointmentStatus.textContent = 'Thank you. Your "Tech visit" request has been sent. We will contact you shortly to confirm the appointment.';
+          appointmentStatus.className = 'appointment-status is-visible is-success';
+        } catch (error) {
+          appointmentStatus.textContent = 'We could not send your request. Please try again or contact us on WhatsApp.';
+          appointmentStatus.className = 'appointment-status is-visible is-error';
+        } finally {
+          submitButton.disabled = false;
+          submitButton.innerHTML = 'Request a Tech Visit <i class="bi bi-arrow-right ms-1"></i>';
+        }
+      });
+    </script>
 
   </main><!-- End #main -->
 
@@ -238,7 +261,7 @@
                             <h3>Services</h3>
                         </div>
                           <ul class="list">
-                              <li><a href="services.html">App Developemnt</a></li>
+                              <li><a href="services.html">App Development</a></li>
                               <li><a href="services.html">Cloud Services</a></li>
                               <li><a href="services.html">Domain and Hosting</a></li>
                               <li><a href="services.html">Network Installation and Maintenance</a></li>

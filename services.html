@@ -192,8 +192,8 @@ Latest Video Tutorials
 </h2>
 
 <p class="lead">
-Learn Odoo ERP, Restaurant POS, Website Development,
-Networking, CCTV Installation and Business Automation.
+Odoo Software Tutorials, SambaPOS Tutorials, Aronium Software Tutorials,
+Networking Tips and Business Automation.
 </p>
 
 </div>
@@ -238,21 +238,21 @@ Step-by-step guide on managing scrap inventory in Odoo.
 <a href="#" class="list-group-item list-group-item-action video-link"
 data-video="C726v-GoyDw">
 
-▶ Odoo Inventory Tutorial
+▶ Odoo Software Tutorials
 
 </a>
 
 <a href="#" class="list-group-item list-group-item-action video-link"
 data-video="knGudW6IGto">
 
-▶ Restaurant POS Guide
+▶ SambaPOS Tutorials
 
 </a>
 
 <a href="#" class="list-group-item list-group-item-action video-link"
 data-video="1_ygibU70ZI">
 
-▶ Aronium Software POS
+▶ Aronium Software Tutorials
 
 </a>
 
@@ -407,6 +407,29 @@ data-video="1_ygibU70ZI">
   <script src="assets/javascripts/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const videoFrame = document.getElementById("featuredVideo");
+    const videoLinks = document.querySelectorAll(".video-link");
+
+    videoLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+
+            const videoId = this.getAttribute("data-video");
+
+            // Change the featured video
+            videoFrame.src = "https://www.youtube.com/embed/" + videoId;
+
+            // Highlight active link
+            videoLinks.forEach(item => item.classList.remove("active"));
+            this.classList.add("active");
+        });
+    });
+
+});
+</script>
 </body>
 
 </html>

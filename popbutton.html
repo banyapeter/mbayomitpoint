@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movable Play Game Button</title>
+  <style>
+    /* Demo page styling */
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f172a;
+      color: #94a3b8;
+      min-height: 150vh; /* scrollable to demonstrate it stays on screen */
+    }
+
+    /* --- FLOATING & MOVABLE CONTAINER (Left-side positioned) --- */
+    #gameWidget {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9999;
+      cursor: grab;
+      user-select: none;
+      touch-action: none; /* Prevents mobile scrolling while dragging */
+    }
+
+    #gameWidget:active {
+      cursor: grabbing;
+    }
+
+    /* --- POP & STAY BUTTON --- */
+    .play-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(236, 72, 153, 0.4);
+      outline: none;
+      pointer-events: auto;
+
+      /* Bouncy Pop-In Animation */
+      opacity: 0;
+      transform: scale(0);
+      animation: popAndStay 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
+      
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Game Icon */
+    .play-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    /* Keyframes for entrance */
+    @keyframes popAndStay {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      70% {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Hover effect */
+    .play-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 12px 30px rgba(236, 72, 153, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Example page background content -->
+  <h1>Your Website / Game Content</h1>
+  <p>The floating button on the left does not block your page.</p>
+  <p>👉 <strong>Click it</strong> to play, or <strong>drag it</strong> anywhere around the screen!</p>
+
+  <!-- Movable Play Game Widget -->
+  <div id="gameWidget">
+    <button class="play-btn" id="playBtn">
+      <!-- Game Controller Icon -->
+      <svg viewBox="0 0 24 24">
+        <path d="M21.58,11.23L18.42,5.7A3,3,0,0,0,15.82,4.2H8.18A3,3,0,0,0,5.58,5.7L2.42,11.23A3,3,0,0,0,2,12.7V17a3,3,0,0,0,3,3H6a3,3,0,0,0,3-3V15h6v2a3,3,0,0,0,3,3h1a3,3,0,0,0,3-3V12.7A3,3,0,0,0,21.58,11.23ZM9,11H8V12a1,1,0,0,1-2,0V11H5a1,1,0,0,1,0-2H6V8A1,1,0,0,1,8,8V9H9a1,1,0,0,1,0,2Zm7,1a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,16,12Zm2-3a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,18,9Z"/>
+      </svg>
+      <span>Play Game!</span>
+    </button>
+  </div>
+
+  <script>
+    const widget = document.getElementById('gameWidget');
+    const playBtn = document.getElementById('playBtn');
+
+    let isDragging = false;
+    let startX, startY, initialLeft, initialTop;
+    let hasMoved = false;
+
+    // Start Drag (Mouse & Touch)
+    const onStart = (e) => {
+      isDragging = true;
+      hasMoved = false;
+
+      const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+      const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+
+      startX = clientX;
+      startY = clientY;
+
+      const rect = widget.getBoundingClientRect();
+      initialLeft = rect.left;
+      initialTop = rect.top;
+
+      // Remove CSS transform centering once manual dragging starts
+      widget.style.transform = 'none';
+      widget.style.left = `${initialLeft}px`;
+      widget.style.top = `${initialTop}px`;
+    };
+
+    // Move (Mouse & Touch)
+    const onMove = (e) => {
+      if (!isDragging) return;
+
+      const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+      const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
+      const deltaX = clientX - startX;
+      const deltaY = clientY - startY;
+
+      // If user moved more than 5px, mark as drag (not a pure click)
+      if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+        hasMoved = true;
+      }
+
+      let newLeft = initialLeft + deltaX;
+      let newTop = initialTop + deltaY;
+
+      // Prevent dragging outside the screen bounds
+      const maxLeft = window.innerWidth - widget.offsetWidth;
+      const maxTop = window.innerHeight - widget.offsetHeight;
+
+      newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
+      newTop = Math.max(10, Math.min(newTop, maxTop - 10));
+
+      widget.style.left = `${newLeft}px`;
+      widget.style.top = `${newTop}px`;
+    };
+
+    // End Drag
+    const onEnd = () => {
+      isDragging = false;
+    };
+
+    // Attach Drag Event Listeners
+    widget.addEventListener('mousedown', onStart);
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+
+    widget.addEventListener('touchstart', onStart, { passive: true });
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('touchend', onEnd);
+
+    // Button Click Handler (only fires if not dragging)
+    playBtn.addEventListener('click', (e) => {
+      if (hasMoved) {
+        e.preventDefault(); // Stop click if it was just a drag release
+        return;
+      }
+
+      // --- Put your Game Launch Logic here ---
+      alert("Launching Game!");
+      // window.location.href = "your-game-url.html";
+    });
+  </script>
+</body>
+</html>

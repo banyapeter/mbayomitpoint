@@ -30,7 +30,57 @@
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <!-- Main CSS File -->
   <link href="assets/stylesheets/styles.css" id="theme-style" rel="stylesheet">
-
+  <style>
+    #gameWidget {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 999999;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+    #gameWidget:active {
+      cursor: grabbing;
+    }
+    .play-game-popup-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(236, 72, 153, 0.45);
+      outline: none;
+      cursor: inherit;
+      opacity: 0;
+      transform: scale(0);
+      animation: popAndStayBtn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .play-game-popup-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+    @keyframes popAndStayBtn {
+      0% { opacity: 0; transform: scale(0); }
+      70% { opacity: 1; transform: scale(1.15); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .play-game-popup-btn:hover {
+      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.7);
+      transform: scale(1.05);
+    }
+  </style>
 
 </head>
 
@@ -1037,6 +1087,16 @@ Strong Community & Support: Large global community, plus professional support av
 
 
   </main><!-- End #main -->
+  <!-- Floating Movable Play Game Button -->
+  <div id="gameWidget">
+    <button class="play-game-popup-btn" id="playBtn">
+      <svg viewBox="0 0 24 24">
+        <path d="M21.58,11.23L18.42,5.7A3,3,0,0,0,15.82,4.2H8.18A3,3,0,0,0,5.58,5.7L2.42,11.23A3,3,0,0,0,2,12.7V17a3,3,0,0,0,3,3H6a3,3,0,0,0,3-3V15h6v2a3,3,0,0,0,3,3h1a3,3,0,0,0,3-3V12.7A3,3,0,0,0,21.58,11.23ZM9,11H8V12a1,1,0,0,1-2,0V11H5a1,1,0,0,1,0-2H6V8A1,1,0,0,1,8,8V9H9a1,1,0,0,1,0,2Zm7,1a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,16,12Zm2-3a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,18,9Z"/>
+      </svg>
+      <span>Play Game!</span>
+    </button>
+  </div>
+
 
   <!--  Footer  -->
   <footer id="footer" class="footer-section">
@@ -1226,6 +1286,82 @@ Strong Community & Support: Large global community, plus professional support av
     })();
   </script>
 
+  <script>
+    (function initPlayWidget() {
+      const widget = document.getElementById('gameWidget');
+      const playBtn = document.getElementById('playBtn');
+
+      if (!widget || !playBtn) return;
+
+      let isDragging = false;
+      let startX, startY, initialLeft, initialTop;
+      let hasMoved = false;
+
+      const onStart = (e) => {
+        isDragging = true;
+        hasMoved = false;
+        const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+        startX = clientX;
+        startY = clientY;
+
+        const rect = widget.getBoundingClientRect();
+        initialLeft = rect.left;
+        initialTop = rect.top;
+
+        widget.style.transform = 'none';
+        widget.style.left = `${initialLeft}px`;
+        widget.style.top = `${initialTop}px`;
+      };
+
+      const onMove = (e) => {
+        if (!isDragging) return;
+        const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
+        const deltaX = clientX - startX;
+        const deltaY = clientY - startY;
+
+        if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+          hasMoved = true;
+        }
+
+        let newLeft = initialLeft + deltaX;
+        let newTop = initialTop + deltaY;
+
+        const maxLeft = window.innerWidth - widget.offsetWidth;
+        const maxTop = window.innerHeight - widget.offsetHeight;
+
+        newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
+        newTop = Math.max(10, Math.min(newTop, maxTop - 10));
+
+        widget.style.left = `${newLeft}px`;
+        widget.style.top = `${newTop}px`;
+      };
+
+      const onEnd = () => {
+        isDragging = false;
+      };
+
+      widget.addEventListener('mousedown', onStart);
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onEnd);
+
+      widget.addEventListener('touchstart', onStart, { passive: true });
+      document.addEventListener('touchmove', onMove, { passive: false });
+      document.addEventListener('touchend', onEnd);
+
+      // Links to your arcade file
+      playBtn.addEventListener('click', (e) => {
+        if (hasMoved) {
+          e.preventDefault();
+          return;
+        }
+        window.location.href = 'mbayom-tech-arcade-upgraded.html';
+      });
+    })();
+  </script>
+ 
 </body>
 
 </html>

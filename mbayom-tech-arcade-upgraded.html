@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MBAYOM Tech Arcade</title>
+<style>
+:root{
+  --p:#B62220;--a:#0c6de0;--bg:#07111f;--c:#0e1b2d;
+  --t:#f5f8ff;--m:#9eb0c7;--ok:#2bdc9b;--bad:#ff5c6c;--gold:#ffd166
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top,#12385d,#07111f 50%,#030811);color:var(--t)}
+.x{width:min(1100px,92%);margin:auto}
+.nav{height:70px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff16}
+.logo{font-weight:900}.logo b{color:var(--p)}
+a{text-decoration:none;color:inherit}
+.btn{display:inline-block;border:0;border-radius:12px;padding:12px 18px;background:linear-gradient(135deg,var(--p),var(--a));color:#fff;font-weight:800;cursor:pointer}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.alt{background:#ffffff0c;border:1px solid #ffffff16}
+.hero{text-align:center;padding:55px 0 30px}
+.pill{color:var(--p);border:1px solid #B6222055;background:#B6222010;padding:8px 14px;border-radius:50px;font-size:13px;font-weight:800}
+h1{font-size:clamp(40px,7vw,72px);margin:18px 0 8px}
+.muted{color:var(--m)}
+.games{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:30px}
+.card,.panel{background:linear-gradient(145deg,#0e1b2d,#091423);border:1px solid #ffffff12;border-radius:20px}
+.card{padding:22px;text-align:center;cursor:pointer;transition:.3s}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 34px #0008;border-color:#ffffff28}
+.panel{padding:24px;margin:18px 0 30px;display:none}
+.panel.on{display:block;animation:panelIn .35s ease}
+@keyframes panelIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.score{color:var(--ok);font-weight:900}
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.stat{background:#ffffff08;border:1px solid #ffffff10;border-radius:14px;padding:12px;text-align:center}
+.stat b{display:block;font-size:22px;margin-top:4px}
+.progress{height:9px;background:#ffffff10;border-radius:99px;overflow:hidden;margin:15px 0}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p),var(--a));transition:width .25s}
+.timer{font-size:28px;font-weight:900;color:var(--gold)}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.answers button{padding:16px;border-radius:12px;border:1px solid #ffffff12;background:#ffffff08;color:#fff;text-align:left;cursor:pointer;font-weight:700;transition:.2s}
+.answers button:hover{background:#ffffff15;transform:translateY(-2px)}
+.answers button.correct{background:#116b50;border-color:var(--ok)}
+.answers button.wrong{background:#762b36;border-color:var(--bad)}
+.answers button:disabled{cursor:default}
+.q{font-size:22px;font-weight:800;margin:22px 0 15px;line-height:1.35}
+.explain{margin-top:15px;padding:14px;border-radius:12px;background:#ffffff08;color:var(--m);display:none}
+.explain.on{display:block}
+.difficulty{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}
+.diff{padding:9px 13px;border-radius:10px;border:1px solid #ffffff18;background:#ffffff08;color:#fff;cursor:pointer;font-weight:700}
+.diff.active{background:linear-gradient(135deg,var(--p),var(--a));border-color:transparent}
+.result{text-align:center;padding:20px}
+.result .big{font-size:54px;font-weight:900;color:var(--ok)}
+.badge{display:inline-block;padding:7px 12px;border-radius:30px;background:#ffd16618;color:var(--gold);font-weight:800}
+.typing-area{position:relative}
+.type-text{font-size:22px;line-height:1.8;background:#050d18;border:1px solid #ffffff12;border-radius:16px;padding:20px;margin:18px 0;min-height:130px}
+.type-text span.correct{color:var(--ok)}
+.type-text span.wrong{color:var(--bad);text-decoration:underline}
+.type-text span.current{background:#ffffff25;border-radius:3px}
+textarea{width:100%;min-height:120px;padding:16px;border-radius:14px;border:1px solid #ffffff18;background:#07111f;color:#fff;font:inherit;resize:none;outline:none}
+textarea:focus{border-color:#0c6de0}
+.mode-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.mode{padding:9px 13px;border-radius:10px;border:1px solid #ffffff18;background:#ffffff08;color:#fff;cursor:pointer;font-weight:700}
+.mode.active{background:linear-gradient(135deg,var(--p),var(--a));border-color:transparent}
+.type-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:15px 0}
+.type-stat{padding:12px;background:#ffffff08;border-radius:13px;text-align:center}
+.type-stat b{display:block;font-size:21px;margin-top:4px}
+.combo{color:var(--gold);font-weight:900}
+.type-best{margin:12px 0;color:var(--m);font-size:14px}
+.typing-result{display:none;margin:18px 0;padding:22px;border:1px solid #2bdc9b55;border-radius:16px;background:linear-gradient(135deg,#116b5033,#0c6de033);text-align:center}
+.typing-result.on{display:block;animation:panelIn .35s ease}
+.typing-result h3{margin:0 0 10px;font-size:25px}.typing-result p{margin:8px 0}.achievement-list{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.achievement{padding:7px 11px;border-radius:99px;background:#ffd1661c;border:1px solid #ffd16644;color:var(--gold);font-size:14px;font-weight:700}
+.demo-btn{padding:9px 13px;font-size:14px}
+.demo-modal{display:none;position:fixed;inset:0;z-index:1000;padding:20px;background:#020711cc;align-items:center;justify-content:center}
+.demo-modal.on{display:flex}.demo-card{width:min(560px,100%);padding:24px;border:1px solid #ffffff24;border-radius:20px;background:linear-gradient(145deg,#142945,#091423);box-shadow:0 24px 60px #000b}
+.demo-head{display:flex;justify-content:space-between;gap:15px;align-items:center}.demo-head h2{margin:0}.demo-close{border:0;background:transparent;color:var(--t);font-size:28px;cursor:pointer}
+.demo-video{margin:18px 0;padding:18px;border-radius:14px;background:#050d18;border:1px solid #ffffff18}.demo-caption{min-height:26px;margin:0 0 14px;font-weight:700;color:var(--gold)}
+.demo-text,.demo-input{padding:13px;border-radius:10px;border:1px solid #ffffff15;background:#0b1b30}.demo-text{min-height:54px}.demo-input{margin-top:10px;color:var(--m)}.demo-action{display:inline-block;margin-top:10px;padding:8px 12px;border-radius:9px;background:linear-gradient(135deg,var(--p),var(--a));font-weight:800}
+.demo-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.demo-stats span{padding:8px;border-radius:9px;background:#ffffff0c;text-align:center;font-size:13px}.demo-actions{display:flex;gap:10px;justify-content:flex-end}
+.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:480px;margin:25px auto}
+.memory button{aspect-ratio:1;border:0;border-radius:13px;background:#152840;color:#fff;font-size:28px;cursor:pointer}
+.memory .open{background:linear-gradient(135deg,var(--p),var(--a))}
+.num{text-align:center;font-size:45px;font-weight:900;padding:25px;letter-spacing:7px}
+input{width:100%;padding:14px;border-radius:12px;border:1px solid #ffffff18;background:#07111f;color:#fff}
+table{width:100%;border-collapse:collapse}
+td,th{padding:12px;border-bottom:1px solid #ffffff12;text-align:left}
+th{color:var(--m)}
+.cta{text-align:center;padding:40px;margin:35px 0;background:#B622200d;border:1px solid #B6222025;border-radius:22px}
+footer{text-align:center;padding:30px;color:var(--m)}
+.ico3d{height:92px;display:grid;place-items:center;perspective:650px;margin-bottom:4px}
+.cube{width:54px;height:54px;display:grid;place-items:center;font-size:27px;border-radius:10px;background:linear-gradient(135deg,#B62220,#0c6de0);animation:cubeSpin 2.4s linear infinite;box-shadow:0 12px 30px #0007}
+.kb{display:grid;grid-template-columns:repeat(5,20px);gap:5px;transform:rotateX(58deg) rotateZ(-42deg);animation:kbFloat 4s ease-in-out infinite}
+.kb i{display:block;width:20px;height:20px;border-radius:5px;background:linear-gradient(160deg,#3d6fa8,#16283f);border:1px solid #ffffff22;box-shadow:0 5px 0 #0b1a2c;animation:keyPress 1s ease-in-out infinite}
+.flip{width:50px;height:66px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(135deg,#B62220,#0c6de0);font-size:28px;animation:cardFlip 1.5s ease-in-out infinite}
+.ring{font-size:32px;font-weight:900;animation:ringSpin 2.8s linear infinite}
+@keyframes cubeSpin{0%{transform:rotateY(0) rotateX(-18deg)}50%{transform:rotateY(180deg) rotateX(18deg) translateY(-8px)}100%{transform:rotateY(360deg) rotateX(-18deg)}}
+@keyframes keyPress{0%,100%{transform:translateY(0)}25%{transform:translateY(5px)}}
+@keyframes kbFloat{0%,100%{transform:rotateX(58deg) rotateZ(-42deg) translateZ(0)}50%{transform:rotateX(58deg) rotateZ(-42deg) translateZ(9px)}}
+@keyframes cardFlip{0%,30%{transform:rotateY(0) translateY(0)}50%,80%{transform:rotateY(180deg) translateY(-7px)}100%{transform:rotateY(360deg) translateY(0)}}
+@keyframes ringSpin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:999}
+.confetti i{position:absolute;top:-20px;width:9px;height:15px;animation:fall 2.2s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+@media(max-width:800px){.games{grid-template-columns:1fr 1fr}.statbar,.type-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.games{grid-template-columns:1fr}.answers{grid-template-columns:1fr}.type-stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="x nav">
+  <div class="logo">MBAYOM <b>IT-POINT</b></div>
+  <a class="btn alt" href="index.html">← Main Website</a>
+</div></header>
+
+<main class="x">
+<section class="hero">
+  <span class="pill">🎮 MBAYOM TECH ARCADE</span>
+  <h1>Play. Think. Win.</h1>
+  <strong><p class="muted">Challenge yourself, earn points and climb the leaderboard.</p></strong>
+  <p class="muted">For complete excitement, try all the games!,</p>
+  <p class="muted">**The 3 Best Players with the highest average scores across all games will be rewarded! 🎉**<br>**Your points will be converted into exciting prizes! 🏆🎁**
+</p>
+</section>
+
+<section class="games">
+  <div class="card" data-game="quiz"><div class="ico3d"><div class="cube">🧠</div></div><h3>IT Quiz</h3><p class="muted">Beat the clock and build your streak.</p></div>
+  <div class="card" data-game="typing"><div class="ico3d"><div class="kb"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><h3>Typing Speed</h3><p class="muted">Race against the clock.</p></div>
+  <div class="card" data-game="memory"><div class="ico3d"><div class="flip">🧩</div></div><h3>Memory Match</h3><p class="muted">Match technology icons.</p></div>
+  <div class="card" data-game="number"><div class="ico3d"><div class="ring">739158</div></div><h3>Number Memory</h3><p class="muted">Remember increasingly long numbers.</p></div>
+</section>
+
+<section id="quiz" class="panel">
+  <div class="top"><h2>🧠 IT Quiz</h2><span class="timer">⏱ <span id="qt">15</span>s</span></div>
+  <div class="statbar">
+    <div class="stat">Question<b><span id="qnum">1</span>/20</b></div>
+    <div class="stat">Score<b id="qs">0</b></div>
+    <div class="stat">Streak<b id="qstreak">0</b></div>
+    <div class="stat">Accuracy<b id="qacc">0%</b></div>
+  </div>
+  <div class="progress"><i id="qprogress"></i></div>
+  <div id="qsetup">
+    <h3>Choose your difficulty</h3>
+    <div class="difficulty">
+      <button class="diff active" data-diff="mixed">🎮 Mixed</button>
+      <button class="diff" data-diff="easy">🟢 Easy</button>
+      <button class="diff" data-diff="medium">🟡 Medium</button>
+      <button class="diff" data-diff="hard">🔴 Hard</button>
+    </div>
+    <button class="btn" id="qStart">Start Quiz 🚀</button>
+    <button class="btn alt demo-btn" data-demo="quiz" type="button">▶ Watch 10-second demo</button>
+  </div>
+  <div id="qa" style="display:none"></div>
+  <div id="qexplain" class="explain"></div>
+  <div id="qresult" class="result" style="display:none"></div>
+  <button class="btn alt back">← Games</button>
+</section>
+
+<section id="typing" class="panel">
+  <div class="top"><h2>⌨️ Typing Speed Challenge</h2><span class="timer">⏱ <span id="timeLeft">30</span>s</span></div>
+  <div class="mode-row">
+    <button class="mode active" data-time="30">30 Seconds</button>
+    <button class="mode" data-time="60">60 Seconds</button>
+  </div>
+  <div class="mode-row">
+    <button class="mode active" data-type="mixed">🎮 Mixed</button>
+    <button class="mode" data-type="easy">🟢 Easy</button>
+    <button class="mode" data-type="expert">🔥 Expert</button>
+  </div>
+  <button class="btn alt demo-btn" data-demo="typing" type="button">▶ Watch 10-second demo</button>
+  <div class="type-stats">
+    <div class="type-stat">WPM<b id="wpm">0</b></div>
+    <div class="type-stat">Accuracy<b id="tacc">100%</b></div>
+    <div class="type-stat">Errors<b id="terrors">0</b></div>
+    <div class="type-stat">Combo<b id="combo">0</b></div>
+    <div class="type-stat">Score<b id="tscore">0</b></div>
+  </div>
+  <div class="progress"><i id="tprogress"></i></div>
+  <p id="tbest" class="type-best">Personal best: 0 WPM · 0 points</p>
+  <p id="ts" class="muted">Accuracy matters. Speed matters. Can you beat your record?</p>
+  <button class="btn" id="tStart">Start Typing 🚀</button>
+  <div class="typing-area">
+    <div id="tt" class="type-text">Press <b>Start Typing</b> to begin your challenge.</div>
+    <textarea id="ti" placeholder="Click here or press Start Typing to begin..." readonly></textarea>
+  </div>
+  <div id="tresult" class="typing-result" aria-live="polite"></div>
+  <button class="btn alt back">← Games</button>
+</section>
+
+<div id="demoModal" class="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demoTitle" aria-hidden="true">
+  <div class="demo-card">
+    <div class="demo-head"><h2 id="demoTitle">⌨️ How to play</h2><button class="demo-close" id="demoClose" type="button" aria-label="Close demo">×</button></div>
+    <div class="demo-video" aria-live="polite">
+      <p id="demoCaption" class="demo-caption"></p>
+      <div id="demoText" class="demo-text"></div>
+      <div id="demoInput" class="demo-input"></div>
+      <div id="demoAction" class="demo-action"></div>
+      <div class="demo-stats"><span>WPM <b id="demoWpm">0</b></span><span>Accuracy <b id="demoAcc">100%</b></span><span>Score <b id="demoScore">0</b></span></div>
+    </div>
+    <div class="demo-actions"><button class="btn alt" id="demoReplay" type="button">Replay</button><button class="btn" id="demoStart" type="button">Try it now</button></div>
+  </div>
+</div>
+
+<section id="memory" class="panel">
+  <div class="top"><h2>🧩 Memory Match</h2><span class="score">Moves: <span id="mv">0</span></span></div>
+  <div id="mb" class="memory"></div>
+  <button class="btn alt demo-btn" data-demo="memory" type="button">▶ Watch 10-second demo</button>
+  <button class="btn" id="mRestart">Restart</button> <button class="btn alt back">← Games</button>
+</section>
+
+<section id="number" class="panel">
+  <div class="top"><h2>🔢 Number Memory</h2><span class="score">Level: <span id="lv">1</span></span></div>
+  <div id="nd" class="num">Ready?</div>
+  <div id="nia" style="display:none"><input id="ni" type="number" inputmode="numeric" placeholder="Enter the number"><br><br><button class="btn" id="nSubmit">Submit</button></div>
+  <p id="nm" class="muted"></p>
+  <button class="btn alt demo-btn" data-demo="number" type="button">▶ Watch 10-second demo</button>
+  <button class="btn" id="nStart">Start</button> <button class="btn alt back">← Games</button>
+</section>
+
+<section class="panel" style="display:block">
+  <h2>🏆 Global Leaderboard</h2>
+  <div style="overflow:auto"><table><thead><tr><th>#</th><th>Player</th><th>Game</th><th>Points</th></tr></thead><tbody id="lb"><tr><td colspan="4">Loading…</td></tr></tbody></table></div>
+</section>
+
+<section class="cta">
+  <h2>Need an IT Solution?</h2>
+  <p class="muted">Business automation, POS, websites, software, networking and IT support.</p>
+  <a class="btn" href="https://wa.me/2348158115339?text=Hello%20Mbayom%20IT-Point%2C%20I%20need%20an%20IT%20solution" target="_blank" rel="noopener noreferrer">Talk to Mbayom IT-Point</a>
+</section>
+</main>
+<footer>© 2026 Mbayom IT-Point Global Solutions</footer>
+<div id="confetti" class="confetti"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+const API_URL='https://script.google.com/macros/s/AKfycbx83Q3QtH09cQo065CUbcGda4TGoAr4yLxlKnCkmIPYtDQv6akKrsCtooXL_7W2GmA/exec';
+const $=id=>document.getElementById(id);
+const api=(action,data={})=>fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,...data})}).then(r=>r.json());
+
+function openG(id){
+ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+ const panel=$(id);if(!panel)return;panel.classList.add('on');panel.scrollIntoView({behavior:'smooth'});
+ if(id==='memory')memory();if(id==='number')numberGame();
+ if(id==='quiz')resetQuizScreen();if(id==='typing')resetTypingScreen();
+}
+function closeG(){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'))}
+document.querySelectorAll('.card[data-game]').forEach(c=>c.addEventListener('click',()=>openG(c.dataset.game)));
+document.querySelectorAll('.back').forEach(b=>b.addEventListener('click',closeG));
+
+/* ================= IT QUIZ ================= */
+const QUESTION_BANK=[
+['easy','What does CPU stand for?',['Central Processing Unit','Computer Power Utility','Central Program User','Core Processing Utility'],0,'CPU means Central Processing Unit.'],
+['easy','Which device connects different networks?',['Switch','Router','Keyboard','Printer'],1,'A router connects and directs traffic between different networks.'],
+['easy','What does HTML stand for?',['HyperText Markup Language','HighText Machine Language','Home Tool Markup Language','Hyper Tool Multi Language'],0,'HTML stands for HyperText Markup Language.'],
+['easy','Which is an operating system?',['Chrome','Windows','Google','HTML'],1,'Windows is an operating system.'],
+['easy','Which protocol is commonly used for secure websites?',['FTP','HTTP','HTTPS','SMTP'],2,'HTTPS adds encryption to normal HTTP communication.'],
+['easy','Which device is mainly used to print documents?',['Router','Printer','Monitor','Scanner'],1,'A printer produces a physical copy of digital documents.'],
+['easy','What does RAM help a computer do?',['Store temporary working data','Connect to Wi-Fi','Print photos','Protect from viruses'],0,'RAM provides fast temporary storage for programs and data currently in use.'],
+['medium','What does DNS primarily do?',['Translates domain names to IP addresses','Encrypts every email','Creates computer viruses','Formats hard drives'],0,'DNS translates human-readable domain names into IP addresses.'],
+['medium','Which protocol is commonly used to transfer files securely over SSH?',['SFTP','SMTP','POP3','DHCP'],0,'SFTP transfers files through the secure SSH protocol.'],
+['medium','What is the main purpose of a firewall?',['Filter network traffic','Increase monitor brightness','Create spreadsheets','Compress images'],0,'A firewall controls network traffic according to security rules.'],
+['medium','What does IP stand for in networking?',['Internet Protocol','Internal Program','Input Port','Internet Provider'],0,'IP means Internet Protocol.'],
+['medium','Which HTTP status code means Not Found?',['200','301','404','500'],2,'HTTP 404 means the requested resource was not found.'],
+['medium','What is a database primarily used for?',['Storing and organizing data','Cooling a CPU','Designing keyboards','Increasing screen size'],0,'Databases store, organize and retrieve structured information.'],
+['hard','What does HTTPS use to protect data in transit?',['TLS encryption','Plain text','Screen brightness','File compression only'],0,'HTTPS normally uses TLS to encrypt communication between client and server.'],
+['hard','Which SQL command is commonly used to retrieve records?',['SELECT','REMOVE','FETCHALL','READDATA'],0,'SELECT is the standard SQL statement for querying data.'],
+['hard','What is a subnet mask used for?',['Identifying network and host portions of an IP address','Encrypting passwords','Installing Windows','Testing printers'],0,'A subnet mask separates the network portion from the host portion of an IPv4 address.'],
+['hard','Which technology is commonly used for containerization?',['Docker','Excel','Bluetooth','BIOS'],0,'Docker is a widely used containerization platform.'],
+['hard','What does API commonly stand for?',['Application Programming Interface','Advanced Printer Input','Application Process Internet','Automated Program Installation'],0,'API stands for Application Programming Interface.'],
+['hard','Which Git command downloads a remote repository locally?',['clone','push','merge-only','upload'],0,'git clone creates a local copy of a remote repository.'],
+['hard','What does CDN commonly help improve?',['Delivery speed of web content','Keyboard durability','Printer ink quality','CPU temperature only'],0,'A CDN distributes cached content closer to users to reduce latency.'],
+['medium','Which port is normally associated with HTTPS?',['21','25','443','8080'],2,'TCP port 443 is the standard port associated with HTTPS.'],
+['hard','What is the primary role of DHCP?',['Automatically assign network configuration','Encrypt websites','Store passwords','Compile JavaScript'],0,'DHCP automatically provides clients with settings such as IP address, gateway and DNS.'],
+['easy','Which one is a web browser?',['Chrome','Windows','Linux','Python'],0,'Chrome is a web browser.'],
+['easy','What symbol is commonly used for comments in JavaScript single-line code?',['//','##','<!--','**'],0,'JavaScript uses // for a single-line comment.']
+];
+let qPool=[],qi=0,qScore=0,qCorrect=0,qStreak=0,qBestStreak=0,qTimer=null,qTime=15,qDiff='mixed',qAnswered=false;
+
+document.querySelectorAll('.diff').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.diff').forEach(x=>x.classList.remove('active'));b.classList.add('active');qDiff=b.dataset.diff;
+}));
+$('qStart').addEventListener('click',startQuiz);
+
+function resetQuizScreen(){
+ clearInterval(qTimer);$('qsetup').style.display='block';$('qa').style.display='none';$('qexplain').classList.remove('on');$('qresult').style.display='none';
+ $('qt').textContent='15';$('qs').textContent='0';$('qstreak').textContent='0';$('qacc').textContent='0%';$('qprogress').style.width='0%';
+}
+function startQuiz(){
+ clearInterval(qTimer);qScore=0;qCorrect=0;qStreak=0;qBestStreak=0;qi=0;
+ qPool=QUESTION_BANK.filter(q=>qDiff==='mixed'||q[0]===qDiff).sort(()=>Math.random()-.5).slice(0,20);
+ while(qPool.length<20)qPool.push(...QUESTION_BANK.sort(()=>Math.random()-.5).slice(0,20-qPool.length));
+ $('qsetup').style.display='none';$('qa').style.display='block';$('qresult').style.display='none';showQuestion();
+}
+function showQuestion(){
+ if(qi>=20){finishQuiz();return}
+ qAnswered=false;qTime=15;$('qt').textContent=qTime;$('qnum').textContent=qi+1;$('qs').textContent=qScore;$('qstreak').textContent=qStreak;
+ $('qacc').textContent=Math.round(qCorrect/Math.max(1,qi)*100)+'%';$('qprogress').style.width=(qi/20*100)+'%';
+ const q=qPool[qi];
+ $('qexplain').classList.remove('on');$('qexplain').textContent='';
+ $('qa').innerHTML='<div class="q">'+(qi+1)+'. '+q[1]+'</div><div class="answers">'+q[2].map((v,i)=>'<button data-i="'+i+'">'+String.fromCharCode(65+i)+'. '+v+'</button>').join('')+'</div>';
+ $('qa').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>answerQuiz(+b.dataset.i)));
+ qTimer=setInterval(()=>{qTime--;$('qt').textContent=qTime;if(qTime<=0){clearInterval(qTimer);answerQuiz(-1)}},1000);
+}
+function answerQuiz(index){
+ if(qAnswered)return;qAnswered=true;clearInterval(qTimer);
+ const q=qPool[qi],buttons=$('qa').querySelectorAll('button');
+ buttons.forEach(b=>b.disabled=true);
+ if(index===q[3]){
+   qCorrect++;qStreak++;qBestStreak=Math.max(qBestStreak,qStreak);
+   const bonus=qTime*5,streakBonus=qStreak>=10?100:qStreak>=5?50:qStreak>=3?20:0;
+   qScore+=100+bonus+streakBonus;buttons[index].classList.add('correct');
+   $('qexplain').innerHTML='✅ <b>Correct!</b> '+q[4]+' <span class="badge">+'+(100+bonus+streakBonus)+' points</span>';
+   if(qStreak>=3) $('qstreak').textContent='🔥 '+qStreak;
+   if(qStreak===5||qStreak===10)celebrate();
+ }else{
+   qStreak=0;if(index>=0)buttons[index].classList.add('wrong');buttons[q[3]].classList.add('correct');
+   $('qexplain').innerHTML='❌ <b>Not quite.</b> '+q[4];
+ }
+ $('qexplain').classList.add('on');$('qs').textContent=qScore;$('qacc').textContent=Math.round(qCorrect/(qi+1)*100)+'%';
+ setTimeout(()=>{qi++;showQuestion()},1100);
+}
+function finishQuiz(){
+ clearInterval(qTimer);$('qa').style.display='none';$('qexplain').classList.remove('on');$('qprogress').style.width='100%';
+ const acc=Math.round(qCorrect/20*100);
+ $('qresult').style.display='block';
+ $('qresult').innerHTML='<div class="badge">🏆 QUIZ COMPLETE</div><div class="big">'+qScore+'</div><h2>'+quizRank(qScore)+'</h2><p>Correct: <b>'+qCorrect+'/20</b> · Accuracy: <b>'+acc+'%</b> · Best streak: <b>🔥 '+qBestStreak+'</b></p><button class="btn" id="qAgain">Play Again</button>';
+ $('qAgain').onclick=startQuiz;
+ celebrate();
+ finish('IT Quiz',qScore);
+}
+function quizRank(s){return s>=3000?'Legendary! 👑':s>=2300?'Excellent! 🔥':s>=1700?'Great Job! ⭐':s>=1000?'Good Run! 👍':'Keep Practising! 💪'}
+
+/* ================= TYPING ================= */
+const TEXTS={
+ easy:[
+ 'Technology makes business faster and easier.',
+ 'Great software solves real business problems.',
+ 'Mbayom IT-Point builds smart business solutions.',
+ 'Good typing speed saves time every day.'
+ ],
+ mixed:[
+ 'Mbayom IT-Point builds smart business solutions for modern businesses.',
+ 'Technology helps companies work faster, serve customers better and grow.',
+ 'A reliable network keeps computers, printers and business systems connected.',
+ 'Great software solves real business problems and improves daily operations.'
+ ],
+ expert:[
+ 'Business automation connects people, processes, data and technology to create faster and more reliable operations.',
+ 'Modern software development requires accuracy, persistence, problem solving and a strong understanding of real business needs.',
+ 'A secure information system should protect data while remaining simple enough for employees to use efficiently every day.'
+ ]};
+let tDuration=30,tType='mixed',tText='',tStart=0,tRunning=false,tTimer=null,tErrors=0,tCorrect=0,tCombo=0,tBestCombo=0,tTyped=0,tLastRender='';
+const TYPING_BEST_KEY='mbayomTypingBest';
+function getTypingBest(){try{return {...{wpm:0,score:0,accuracy:0},...JSON.parse(localStorage.getItem(TYPING_BEST_KEY)||'{}')}}catch(_){return {wpm:0,score:0,accuracy:0}}}
+function showTypingBest(){const best=getTypingBest();$('tbest').textContent='Personal best: '+best.wpm+' WPM · '+best.score+' points';}
+function saveTypingBest(wpm,score,accuracy){const best=getTypingBest(),isNew=wpm>best.wpm||score>best.score||accuracy>best.accuracy;if(isNew){const next={wpm:Math.max(best.wpm,wpm),score:Math.max(best.score,score),accuracy:Math.max(best.accuracy,accuracy)};try{localStorage.setItem(TYPING_BEST_KEY,JSON.stringify(next))}catch(_){}}showTypingBest();return isNew}
+document.querySelectorAll('.mode[data-time]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.mode[data-time]').forEach(x=>x.classList.remove('active'));b.classList.add('active');tDuration=+b.dataset.time;resetTypingScreen()}));
+document.querySelectorAll('.mode[data-type]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.mode[data-type]').forEach(x=>x.classList.remove('active'));b.classList.add('active');tType=b.dataset.type;resetTypingScreen()}));
+$('tStart').addEventListener('click',startTyping);
+$('ti').addEventListener('input',typingInput);
+$('ti').addEventListener('click',()=>{if(!tRunning)startTyping()});
+let demoTimer=null,demoStep=0,demoGame='typing',DEMO_STEPS=[];
+const DEMO_GUIDES={
+ typing:{title:'⌨️ Typing Speed: How to play',steps:[
+  ['1. Choose a time and difficulty.','Select 30 Seconds and Easy mode.','','Ready to start',0,'100%',0],
+  ['2. Press Start Typing.','Technology makes business faster and easier.','','Start Typing 🚀',0,'100%',0],
+  ['3. Type the sentence exactly as shown.','Technology makes business faster and easier.','Technology makes bus','Typing…',32,'100%',180],
+  ['4. Your speed and score update live.','Technology makes business faster and easier.','Technology makes business faster and easier.','Great work!',46,'100%',610],
+  ['5. When time ends, view your results and play again.','Challenge complete!','46 WPM · 100% accuracy','Play Again 🚀',46,'100%',610]
+ ]},
+ quiz:{title:'🧠 IT Quiz: How to play',steps:[
+  ['1. Choose a difficulty, then press Start Quiz.','Easy · Medium · Hard','','Start Quiz 🚀',0,'—',0],
+  ['2. Read the question before the timer runs out.','What does CPU stand for?','A. Central Processing Unit','15 seconds',0,'—',0],
+  ['3. Select the answer you think is correct.','What does CPU stand for?','A. Central Processing Unit','Correct! +175 points',0,'—',175],
+  ['4. Build streaks for bonus points.','Answer the next question quickly.','🔥 Streak: 3','Keep going!',0,'—',525],
+  ['5. Complete 20 questions to see your score.','Quiz complete!','Accuracy: 90%','Play Again',0,'90%',3150]
+ ]},
+ memory:{title:'🧩 Memory Match: How to play',steps:[
+  ['1. Press Restart to shuffle the cards.','❓  ❓  ❓  ❓','Find every matching pair.','Restart',0,'—',0],
+  ['2. Turn over two cards at a time.','💻  ❓  ❓  ❓','First card: 💻','Moves: 1',0,'—',0],
+  ['3. Matching cards stay visible.','💻  💻  ❓  ❓','Pair found!','Moves: 1',0,'—',250],
+  ['4. Keep matching every pair.','💻  💻  📱  📱','Two pairs found!','Moves: 4',0,'—',600],
+  ['5. Finish with the fewest moves possible.','All pairs matched!','Great memory!','Play Again',0,'—',1000]
+ ]},
+ number:{title:'🔢 Number Memory: How to play',steps:[
+  ['1. Press Start to reveal a number.','Ready?','The number appears briefly.','Start',0,'—',0],
+  ['2. Memorise the number before it disappears.','739','Remember it!','Level 1',0,'—',0],
+  ['3. Type the number you saw.','❓','739','Submit',0,'—',0],
+  ['4. A correct answer increases the level.','Correct!','Next number is longer.','Level 2',0,'—',100],
+  ['5. Keep going for a higher score.','Level 5','Challenge your memory!','Play again',0,'—',400]
+ ]}
+};
+function renderDemo(){const s=DEMO_STEPS[demoStep];$('demoCaption').textContent=s[0];$('demoText').textContent=s[1];$('demoInput').textContent=s[2]||'Your typing area...';$('demoAction').textContent=s[3];$('demoWpm').textContent=s[4];$('demoAcc').textContent=s[5];$('demoScore').textContent=s[6];}
+function playDemo(){clearInterval(demoTimer);demoStep=0;renderDemo();demoTimer=setInterval(()=>{demoStep=(demoStep+1)%DEMO_STEPS.length;renderDemo()},1800)}
+function closeDemo(){clearInterval(demoTimer);demoTimer=null;$('demoModal').classList.remove('on');$('demoModal').setAttribute('aria-hidden','true')}
+function openDemo(game='typing'){demoGame=game;const guide=DEMO_GUIDES[game]||DEMO_GUIDES.typing;DEMO_STEPS=guide.steps;$('demoTitle').textContent=guide.title;$('demoModal').classList.add('on');$('demoModal').setAttribute('aria-hidden','false');playDemo();$('demoClose').focus()}
+document.querySelectorAll('[data-demo]').forEach(button=>button.addEventListener('click',()=>openDemo(button.dataset.demo)));
+$('demoClose').addEventListener('click',closeDemo);$('demoReplay').addEventListener('click',playDemo);$('demoStart').addEventListener('click',()=>{closeDemo();if(demoGame==='quiz'){openG('quiz');startQuiz()}else if(demoGame==='memory'){openG('memory')}else if(demoGame==='number'){openG('number')}else{openG('typing');startTyping()}});
+$('demoModal').addEventListener('click',e=>{if(e.target===$('demoModal'))closeDemo()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&demoTimer)closeDemo()});
+
+function resetTypingScreen(){
+ clearInterval(tTimer);tRunning=false;tText='';tStart=0;tErrors=0;tCorrect=0;tCombo=0;tBestCombo=0;tTyped=0;
+ $('timeLeft').textContent=tDuration;$('wpm').textContent='0';$('tacc').textContent='100%';$('terrors').textContent='0';$('combo').textContent='0';$('tscore').textContent='0';$('tprogress').style.width='0%';$('ti').readOnly=true;$('ti').value='';$('tStart').disabled=false;$('tStart').textContent='Start Typing 🚀';
+ $('tt').innerHTML='Press <b>Start Typing</b> to begin your challenge.';$('ts').textContent='Accuracy matters. Speed matters. Can you beat your record?';$('tresult').classList.remove('on');$('tresult').innerHTML='';showTypingBest();
+}
+function startTyping(){
+ clearInterval(tTimer);tText=TEXTS[tType][Math.floor(Math.random()*TEXTS[tType].length)];tStart=Date.now();tRunning=true;tErrors=0;tCorrect=0;tCombo=0;tBestCombo=0;tTyped=0;
+ $('ti').readOnly=false;$('ti').value='';$('ti').focus();$('tStart').disabled=true;$('tStart').textContent='Typing…';renderText('');
+ tTimer=setInterval(updateTypingTime,100);
+}
+function renderText(value){
+ let out='';
+ for(let i=0;i<tText.length;i++){
+   let cls=i===value.length?'current':i<value.length?(value[i]===tText[i]?'correct':'wrong'):'';
+   out+='<span class="'+cls+'">'+escapeHtml(tText[i])+'</span>';
+ }
+ $('tt').innerHTML=out;
+}
+function typingInput(){
+ if(!tRunning)return;
+ const value=$('ti').value.slice(0,tText.length);
+ if(value!==$('ti').value)$('ti').value=value;
+ tTyped=value.length;
+ tCorrect=0;tErrors=0;tCombo=0;
+ for(let i=0;i<value.length;i++){
+   if(value[i]===tText[i]){tCorrect++;tCombo++;tBestCombo=Math.max(tBestCombo,tCombo)}else{tErrors++;tCombo=0}
+ }
+ renderText(value);updateTypingStats();
+ if(value===tText){tText=TEXTS[tType][Math.floor(Math.random()*TEXTS[tType].length)];$('ti').value='';renderText('')}
+}
+function updateTypingTime(){
+ if(!tRunning)return;
+ const elapsed=(Date.now()-tStart)/1000,left=Math.max(0,tDuration-elapsed);
+ $('timeLeft').textContent=Math.ceil(left);$('tprogress').style.width=(elapsed/tDuration*100)+'%';updateTypingStats();
+ if(left<=0)endTyping();
+}
+function updateTypingStats(){
+ const elapsed=Math.max(.1,(Date.now()-tStart)/60000),wpm=Math.round((tCorrect/5)/elapsed),acc=Math.round(tCorrect/Math.max(1,tCorrect+tErrors)*100);
+ const score=Math.max(0,Math.round(wpm*10+acc*5+tBestCombo*10));
+ $('wpm').textContent=isFinite(wpm)?wpm:0;$('tacc').textContent=acc+'%';$('terrors').textContent=tErrors;$('combo').textContent=tBestCombo;$('tscore').textContent=score;
+}
+function endTyping(){
+ if(!tRunning)return;tRunning=false;clearInterval(tTimer);$('ti').readOnly=true;$('tStart').disabled=false;$('tStart').textContent='Play Again 🚀';
+ const elapsed=Math.max(.1,(Date.now()-tStart)/60000),wpm=Math.round((tCorrect/5)/elapsed),acc=Math.round(tCorrect/Math.max(1,tCorrect+tErrors)*100),score=Math.max(0,Math.round(wpm*10+acc*5+tBestCombo*10));
+ $('ts').innerHTML='🎉 Time! <b>'+wpm+' WPM</b> · <b>'+acc+'% accuracy</b> · <b>'+score+' points</b>';
+ const achievements=[];
+ if(wpm>=50)achievements.push('⚡ Speed Demon: 50+ WPM');
+ if(acc>=98)achievements.push('🎯 Precision Pro: 98% accuracy');
+ if(tErrors===0&&tCorrect>0)achievements.push('✨ Flawless Finish');
+ if(tBestCombo>=40)achievements.push('🔥 Long Streak: 40+ keys');
+ const isNewBest=saveTypingBest(wpm,score,acc);
+ $('tresult').innerHTML='<h3>🏁 Challenge complete!</h3><p><b>'+wpm+' WPM</b> · <b>'+acc+'% accuracy</b> · <b>'+score+' points</b></p>'+(isNewBest?'<p class="badge">🏆 New personal best!</p>':'')+(achievements.length?'<div class="achievement-list">'+achievements.map(a=>'<span class="achievement">'+a+'</span>').join('')+'</div>':'');
+ $('tresult').classList.add('on');
+ if(wpm>=50&&acc>=90)celebrate();
+ finish('Typing Speed',score);
+}
+
+/* ================= MEMORY ================= */
+const EMOJI=['💻','🖥️','📱','🌐','⌨️','🖨️','📡','⚙️'];
+let first=null,lock=false,matched=0,moves=0;
+function memory(){
+ const b=$('mb');b.innerHTML='';first=null;lock=false;matched=0;moves=0;$('mv').textContent='0';
+ [...EMOJI,...EMOJI].sort(()=>Math.random()-.5).forEach(v=>{
+  const x=document.createElement('button');x.textContent='❔';x.dataset.v=v;
+  x.addEventListener('click',()=>{
+   if(lock||x.classList.contains('open'))return;x.classList.add('open');x.textContent=v;
+   if(!first){first=x;return}moves++;$('mv').textContent=moves;
+   if(first.dataset.v===x.dataset.v){matched++;first=null;if(matched===EMOJI.length)finish('Memory Match',Math.max(100,1000-moves*20))}
+   else{const a=first;lock=true;setTimeout(()=>{a.classList.remove('open');x.classList.remove('open');a.textContent='❔';x.textContent='❔';first=null;lock=false},600)}
+  });b.appendChild(x)
+ })
+}
+$('mRestart').addEventListener('click',memory);
+
+/* ================= NUMBER MEMORY ================= */
+let target='',level=1;
+function numberGame(){level=1;$('lv').textContent='1';$('nm').textContent='';nextN()}
+function nextN(){target=Array.from({length:level+2},()=>Math.floor(Math.random()*10)).join('');$('nd').textContent=target;$('nia').style.display='none';setTimeout(()=>{$('nd').textContent='❓';$('nia').style.display='block';$('ni').value='';$('ni').focus()},1000+level*180)}
+function checkN(){if($('ni').value===target){level++;$('lv').textContent=level;$('nm').textContent='✅ Correct!';$('nia').style.display='none';setTimeout(nextN,500)}else{$('nm').textContent='❌ Game over! The number was '+target;$('nia').style.display='none';finish('Number Memory',(level-1)*100);level=1;$('lv').textContent='1'}}
+$('nStart').addEventListener('click',numberGame);$('nSubmit').addEventListener('click',checkN);$('ni').addEventListener('keydown',e=>{if(e.key==='Enter')checkN()});
+
+/* ================= SCORES ================= */
+function finish(game,points){
+ setTimeout(()=>{
+  const name=prompt('Enter your name to save your score:','Player');if(!name)return;
+  const wa=prompt('WhatsApp number (optional):','')||'';
+  api('saveScore',{name,whatsapp:wa,game,score:points}).then(loadLB).catch(()=>alert('Score: '+points+' points (could not reach the server).'));
+ },100);
+}
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function loadLB(){api('leaderboard').then(x=>{const rows=(x&&x.rows)||[];$('lb').innerHTML=rows.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+escapeHtml(r.name)+'</td><td>'+escapeHtml(r.game)+'</td><td>'+r.points+'</td></tr>').join('')||'<tr><td colspan="4">No scores yet.</td></tr>'}).catch(()=>$('lb').innerHTML='<tr><td colspan="4">Leaderboard unavailable right now.</td></tr>')}
+function celebrate(){
+ const box=$('confetti');box.innerHTML='';
+ for(let i=0;i<55;i++){const x=document.createElement('i');x.style.left=Math.random()*100+'%';x.style.animationDelay=Math.random()*.5+'s';x.style.transform='rotate('+Math.random()*360+'deg)';box.appendChild(x)}
+ setTimeout(()=>box.innerHTML='',2800);
+}
+resetQuizScreen();resetTypingScreen();loadLB();
+});
+</script>
+</body>
+</html>

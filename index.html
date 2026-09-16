@@ -65,6 +65,9 @@
       animation: popAndStayBtn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
+    .play-game-popup-btn span {
+      color: #ffffff;
+    }
     .play-game-popup-btn svg {
       width: 20px;
       height: 20px;
@@ -135,7 +138,7 @@
     <div class="container position-relative">
       <div class="row gy-5 aos-init aos-animate">
         <div class="col-lg-7 offset-lg-5 dark-bg order-lg-1 d-flex flex-column justify-content-start text-left caption">
-          <h1 data-aos="fade-up">Delivering Superior IT <span>Solutions</span><span class="circle" data-aos="fade-right" data-aos-delay="800">.</span></h1>
+          <h1 data-aos="fade-up" style="color: #fff;">Delivering Superior IT <span>Solutions</span><span class="circle" data-aos="fade-right" data-aos-delay="800">.</span></h1>
           <p data-aos="fade-up" data-aos-delay="400">We are best known for business automation solutions across various industries, 
             including software installation and customization, system repairs, IT training, network installation, 
             and technical support. We also specialize in designing, developing, and deploying software solutions 
@@ -1253,7 +1256,7 @@
     .game-promo__eyebrow { display: inline-block; margin-bottom: 12px; padding: 6px 11px; border: 1px solid rgb(255 255 255 / 55%); border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .07em; }
     .game-promo h2 { margin: 0 0 12px; color: #fff; font-size: clamp(26px, 6vw, 38px); line-height: 1.12; }
     .game-promo p { margin: 0 0 24px; color: #fff; font-size: 16px; }
-    .game-promo__play { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 8px; color: #B62220; background: #fff; font-weight: 700; text-decoration: none; }
+    .game-promo__play { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 8px; color: #fff; background: linear-gradient(135deg, #0c6de0, #0a3a7a); border: 1px solid rgba(255, 255, 255, 0.25); box-shadow: 0 10px 24px rgb(12 109 224 / 35%); font-weight: 700; text-decoration: none; }
   </style>
 
   <!-- Vendor JS Files -->

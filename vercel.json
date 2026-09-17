@@ -1,7 +1,3 @@
 {
-  "functions": {
-    "api/ai-agent.js": {
-      "maxDuration": 30
-    }
-  }
+  "functions": {}
 }

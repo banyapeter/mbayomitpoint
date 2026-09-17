@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pending = addMessage('Thinking...', 'assistant');
 
     try {
+      if (assistantEndpoint.includes('YOUR-VERCEL-PROJECT')) {
+        throw new Error('Please connect the chat to your Vercel endpoint in assets/javascripts/ai-chat.js.');
+      }
       const response = await fetch(assistantEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

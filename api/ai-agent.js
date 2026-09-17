@@ -1,4 +1,7 @@
-const allowedOrigin = 'https://www.mbayomitpoint.com.ng';
+const allowedOrigins = new Set([
+  'https://www.mbayomitpoint.com.ng',
+  'https://mbayomitpoint.com.ng'
+]);
 
 const systemPrompt = `You are the customer-support assistant for Mbayom IT-Point Global Solutions in Abuja, Nigeria.
 Answer briefly and professionally using only these known facts:
@@ -17,8 +20,8 @@ function sendJson(res, status, body) {
 export default async function handler(req, res) {
   const origin = req.headers.origin;
 
-  if (origin === allowedOrigin) {
-    res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  if (allowedOrigins.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Vary', 'Origin');
@@ -28,7 +31,7 @@ export default async function handler(req, res) {
     return res.status(204).end();
   }
 
-  if (origin !== allowedOrigin) {
+  if (!allowedOrigins.has(origin)) {
     return sendJson(res, 403, { error: 'This assistant only accepts requests from the Mbayom IT-Point website.' });
   }
 

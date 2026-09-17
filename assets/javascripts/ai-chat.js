@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const assistantEndpoint = 'https://YOUR-VERCEL-PROJECT.vercel.app/api/ai-agent';
+  const assistantEndpoint = 'https://mbayomitpoint-7iq18wgu5-mbayom-it-point.vercel.app/api/ai-agent';
   const chat = document.getElementById('ai-chat');
   const toggle = document.getElementById('ai-chat-toggle');
   const close = document.getElementById('ai-chat-close');

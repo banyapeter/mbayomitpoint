@@ -17,6 +17,15 @@ function sendJson(res, status, body) {
   res.status(status).json(body);
 }
 
+async function getRequestBody(req) {
+  if (req.body && typeof req.body === 'object') return req.body;
+  if (typeof req.body === 'string') return JSON.parse(req.body);
+
+  let rawBody = '';
+  for await (const chunk of req) rawBody += chunk;
+  return rawBody ? JSON.parse(rawBody) : {};
+}
+
 export default async function handler(req, res) {
   const origin = req.headers.origin;
 
@@ -39,7 +48,14 @@ export default async function handler(req, res) {
     return sendJson(res, 405, { error: 'Only POST requests are allowed.' });
   }
 
-  const message = typeof req.body?.message === 'string' ? req.body.message.trim() : '';
+  let requestBody;
+  try {
+    requestBody = await getRequestBody(req);
+  } catch {
+    return sendJson(res, 400, { error: 'Please send a valid JSON message.' });
+  }
+
+  const message = typeof requestBody?.message === 'string' ? requestBody.message.trim() : '';
   if (!message || message.length > 500) {
     return sendJson(res, 400, { error: 'Please enter a message of up to 500 characters.' });
   }

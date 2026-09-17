@@ -27,6 +27,7 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/stylesheets/ai-chat.css" rel="stylesheet">
   <!-- Main CSS File -->
   <link href="assets/stylesheets/styles.css" id="theme-style" rel="stylesheet">
   <style>
@@ -1233,6 +1234,30 @@
         </svg>
     </a>
 
+  <section class="ai-chat" id="ai-chat" aria-label="Mbayom IT-Point assistant">
+    <button class="ai-chat__toggle" id="ai-chat-toggle" type="button" aria-expanded="false" aria-controls="ai-chat-panel">
+      <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+      <span>Ask our assistant</span>
+    </button>
+    <div class="ai-chat__panel" id="ai-chat-panel" aria-hidden="true">
+      <div class="ai-chat__header">
+        <div>
+          <strong>Mbayom Assistant</strong>
+          <small>Services, support and appointments</small>
+        </div>
+        <button class="ai-chat__close" id="ai-chat-close" type="button" aria-label="Close assistant">&times;</button>
+      </div>
+      <div class="ai-chat__messages" id="ai-chat-messages" aria-live="polite">
+        <div class="ai-chat__message ai-chat__message--assistant">Hello. Ask me about our IT services, software solutions, support, or booking a visit.</div>
+      </div>
+      <form class="ai-chat__form" id="ai-chat-form">
+        <label class="visually-hidden" for="ai-chat-input">Message</label>
+        <input id="ai-chat-input" name="message" maxlength="500" autocomplete="off" placeholder="How can we help?" required>
+        <button type="submit" aria-label="Send message"><i class="bi bi-send-fill" aria-hidden="true"></i></button>
+      </form>
+    </div>
+  </section>
+
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center active">
     <i class="bi bi-arrow-up-short"></i>
   </a>
@@ -1277,6 +1302,7 @@
   <!-- Template Main JS File -->
   <script defer src="assets/javascripts/main.js"></script>
   <script defer src="assets/javascripts/youtube.js"></script>
+  <script defer src="assets/javascripts/ai-chat.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const popup = document.getElementById('game-promo');

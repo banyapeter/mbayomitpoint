@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="794" height="1123" viewBox="0 0 794 1123" role="img" aria-labelledby="title description">
+  <title id="title">Mbayom IT-Point Global Solutions registration document preview</title>
+  <desc id="description">A placeholder A4 document preview for the company's CAC registration certificate.</desc>
+  <rect width="794" height="1123" fill="#f7f9fc"/>
+  <rect x="28" y="28" width="738" height="1067" rx="8" fill="#ffffff" stroke="#d9e2ec" stroke-width="4"/>
+  <rect x="28" y="28" width="738" height="170" rx="8" fill="#0b3d62"/>
+  <circle cx="108" cy="113" r="40" fill="#e7b84b"/>
+  <path d="M88 113h40M108 93v40" stroke="#0b3d62" stroke-width="8" stroke-linecap="round"/>
+  <text x="170" y="98" fill="#ffffff" font-family="Arial, sans-serif" font-size="25" font-weight="700">MBAYOM IT-POINT</text>
+  <text x="170" y="134" fill="#d9edf7" font-family="Arial, sans-serif" font-size="18">GLOBAL SOLUTIONS</text>
+  <text x="397" y="270" text-anchor="middle" fill="#0b3d62" font-family="Arial, sans-serif" font-size="31" font-weight="700">CAC REGISTRATION DOCUMENT</text>
+  <text x="397" y="310" text-anchor="middle" fill="#607d94" font-family="Arial, sans-serif" font-size="18">A4 document preview</text>
+  <rect x="100" y="375" width="594" height="82" rx="6" fill="#eef5f8"/>
+  <text x="130" y="408" fill="#607d94" font-family="Arial, sans-serif" font-size="15">REGISTERED BUSINESS NAME</text>
+  <text x="130" y="438" fill="#0b3d62" font-family="Arial, sans-serif" font-size="23" font-weight="700">Mbayom IT-Point Global Solutions</text>
+  <line x1="100" y1="520" x2="694" y2="520" stroke="#d9e2ec" stroke-width="3"/>
+  <line x1="100" y1="575" x2="600" y2="575" stroke="#d9e2ec" stroke-width="3"/>
+  <line x1="100" y1="630" x2="650" y2="630" stroke="#d9e2ec" stroke-width="3"/>
+  <line x1="100" y1="685" x2="560" y2="685" stroke="#d9e2ec" stroke-width="3"/>
+  <rect x="100" y="760" width="190" height="190" fill="#f7f9fc" stroke="#d9e2ec" stroke-width="3"/>
+  <path d="M125 785h45v45h-45zM220 785h45v45h-45zM125 880h45v45h-45zM190 850h25v25h-25zM235 865h30v30h-30zM180 805h22v22h-22z" fill="#0b3d62"/>
+  <text x="397" y="825" fill="#0b3d62" font-family="Arial, sans-serif" font-size="20" font-weight="700">Official document link</text>
+  <text x="397" y="860" fill="#607d94" font-family="Arial, sans-serif" font-size="16">Click the image to view the</text>
+  <text x="397" y="887" fill="#607d94" font-family="Arial, sans-serif" font-size="16">verified CAC document.</text>
+  <rect x="100" y="1015" width="594" height="42" rx="6" fill="#e7b84b"/>
+  <text x="397" y="1043" text-anchor="middle" fill="#0b3d62" font-family="Arial, sans-serif" font-size="15" font-weight="700">REPLACE THE CAC LINK IN THE BLOG PAGE</text>
+</svg>

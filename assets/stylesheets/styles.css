@@ -433,22 +433,55 @@ img:hover {
   inset: 0;
   z-index: 999999;
   overflow: hidden;
-  background: var(--color-primary);
-  transition: all 0.6s ease-out;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 42%, rgb(12 109 224 / 24%), transparent 28%),
+    linear-gradient(135deg, #070b18 0%, #101a36 52%, #07101f 100%);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
 }
 
 #preloader:before {
   content: "";
-  position: fixed;
-  top: calc(48% - 3px);
-  left: calc(48% - 3px);
-  border: 2px solid #fff;
-  border-color: var(--light-color) transparent var(--light-color) transparent;
+  position: absolute;
+  width: 92px;
+  height: 92px;
+  border: 2px solid rgb(255 255 255 / 14%);
+  border-top-color: #ecb21f;
+  border-right-color: #0c6de0;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  -webkit-animation: animate-preloader 1.5s linear infinite;
-  animation: animate-preloader 1.5s linear infinite;
+  box-shadow: 0 0 35px rgb(12 109 224 / 22%);
+  animation: animate-preloader 1.15s linear infinite;
+}
+
+#preloader:after {
+  content: "MBAYOM IT-POINT\A Loading your digital experience";
+  position: relative;
+  z-index: 1;
+  width: 210px;
+  padding-top: 2px;
+  color: #fff;
+  text-align: center;
+  white-space: pre;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.8;
+  letter-spacing: 0.13em;
+  text-shadow: 0 2px 18px rgb(0 0 0 / 45%);
+  animation: preloader-copy 1.8s ease-in-out infinite;
+}
+
+#preloader:after::first-line {
+  color: #fff;
+}
+
+#preloader.is-loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 @-webkit-keyframes animate-preloader {
@@ -468,6 +501,18 @@ img:hover {
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes preloader-copy {
+  0%, 100% { opacity: 0.62; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #preloader:before,
+  #preloader:after {
+    animation: none;
   }
 }
 

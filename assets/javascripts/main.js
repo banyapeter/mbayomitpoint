@@ -363,8 +363,11 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   const preloader = document.querySelector('#preloader');
   if (preloader) {
+    preloader.setAttribute('aria-label', 'Loading Mbayom IT-Point');
+    preloader.setAttribute('role', 'status');
     window.addEventListener('load', () => {
-      preloader.remove();
+      preloader.classList.add('is-loaded');
+      window.setTimeout(() => preloader.remove(), 750);
     });
   }
 

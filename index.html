@@ -83,7 +83,6 @@
       transform: scale(1.05);
     }
   </style>
-
 </head>
 
 <body>
@@ -1118,7 +1117,6 @@
     </button>
   </div>
 
-
   <!--  Footer  -->
   <footer id="footer" class="footer-section">
     <div class="container">
@@ -1239,28 +1237,6 @@
 
   <div id="preloader"></div>
 
-  <div class="game-promo" id="game-promo" aria-hidden="true" role="dialog" aria-labelledby="game-promo-title">
-    <div class="game-promo__card">
-      <button class="game-promo__close" type="button" aria-label="Close game promotion">&times;</button>
-      <span class="game-promo__eyebrow">MBAYOM TECH ARCADE</span>
-      <h2 id="game-promo-title">Play Mbayom Game and win points!</h2>
-      <p>Test your tech skills, earn points, and climb the leaderboard.</p>
-      <a class="game-promo__play" href="mbayom-tech-arcade-upgraded.html">Play now <i class="bi bi-arrow-right"></i></a>
-    </div>
-  </div>
-
-  <style>
-    .game-promo { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 20px; background: rgb(0 0 0 / 58%); opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease; }
-    .game-promo.is-visible { opacity: 1; visibility: visible; }
-    .game-promo__card { position: relative; width: min(460px, 100%); padding: 38px 32px 32px; border-radius: 20px; color: #fff; text-align: center; background: linear-gradient(135deg, #B62220, #0c6de0); box-shadow: 0 24px 55px rgb(0 0 0 / 35%); transform: translateY(14px) scale(.97); transition: transform .25s ease; }
-    .game-promo.is-visible .game-promo__card { transform: translateY(0) scale(1); }
-    .game-promo__close { position: absolute; top: 10px; right: 14px; border: 0; background: transparent; color: #fff; font-size: 32px; line-height: 1; cursor: pointer; }
-    .game-promo__eyebrow { display: inline-block; margin-bottom: 12px; padding: 6px 11px; border: 1px solid rgb(255 255 255 / 55%); border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .07em; }
-    .game-promo h2 { margin: 0 0 12px; color: #fff; font-size: clamp(26px, 6vw, 38px); line-height: 1.12; }
-    .game-promo p { margin: 0 0 24px; color: #fff; font-size: 16px; }
-    .game-promo__play { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 8px; color: #fff; background: linear-gradient(135deg, #0c6de0, #0a3a7a); border: 1px solid rgba(255, 255, 255, 0.25); box-shadow: 0 10px 24px rgb(12 109 224 / 35%); font-weight: 700; text-decoration: none; }
-  </style>
-
   <!-- Vendor JS Files -->
   <script defer src="assets/javascripts/jquery.min.js"></script>
   <script defer src="assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -1277,37 +1253,6 @@
   <!-- Template Main JS File -->
   <script defer src="assets/javascripts/main.js"></script>
   <script defer src="assets/javascripts/youtube.js"></script>
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const popup = document.getElementById('game-promo');
-      if (!popup) return;
-
-      const closeButton = popup.querySelector('.game-promo__close');
-      let shown = false;
-
-      const closePopup = () => {
-        popup.classList.remove('is-visible');
-        popup.setAttribute('aria-hidden', 'true');
-      };
-
-      const showPopup = () => {
-        if (shown) return;
-        shown = true;
-        popup.classList.add('is-visible');
-        popup.setAttribute('aria-hidden', 'false');
-      };
-
-      window.addEventListener('scroll', () => {
-        if (window.scrollY >= 280) showPopup();
-      }, { passive: true });
-
-      closeButton?.addEventListener('click', closePopup);
-      popup.addEventListener('click', event => {
-        if (event.target === popup) closePopup();
-      });
-    });
-  </script>
-
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const widget = document.getElementById('gameWidget');
@@ -1382,7 +1327,6 @@
       });
     });
   </script>
- 
 </body>
 
 </html>

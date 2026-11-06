@@ -163,8 +163,7 @@
             <div class="appointment-card">
               <h2>Request an appointment</h2>
               <p class="form-note">Fields marked with * are required.</p>
-              <form id="appointment-form" action="https://formspree.io/f/xgvzpdey" method="POST">
-                <input type="hidden" name="_subject" value="New Tech Visit Appointment Request">
+              <form id="appointment-form">
                 <div class="row">
                   <div class="col-md-6"><div class="form-group"><label for="full-name">Full Name *</label><input class="form-control" id="full-name" name="full_name" type="text" autocomplete="name" required></div></div>
                   <div class="col-md-6"><div class="form-group"><label for="business-name">Business Name *</label><input class="form-control" id="business-name" name="business_name" type="text" required></div></div>
@@ -197,27 +196,42 @@
       const appointmentForm = document.getElementById('appointment-form');
       const appointmentStatus = document.getElementById('appointment-status');
 
-      appointmentForm.addEventListener('submit', async function (event) {
+      appointmentForm.addEventListener('submit', function (event) {
         event.preventDefault();
         const submitButton = appointmentForm.querySelector('button[type="submit"]');
         submitButton.disabled = true;
-        submitButton.innerHTML = 'Sending request...';
+        submitButton.innerHTML = 'Opening WhatsApp...';
         appointmentStatus.className = 'appointment-status';
 
         try {
-          const response = await fetch(appointmentForm.action, {
-            method: 'POST',
-            body: new FormData(appointmentForm),
-            headers: { 'Accept': 'application/json' }
-          });
+          const formData = new FormData(appointmentForm);
+          const message = [
+            'New Tech Visit Appointment Request',
+            `Full Name: ${formData.get('full_name')}`,
+            `Business Name: ${formData.get('business_name')}`,
+            `Phone Number: ${formData.get('phone')}`,
+            `Email Address: ${formData.get('email') || 'Not provided'}`,
+            `Visit Address: ${formData.get('visit_address')}`,
+            `Service: ${formData.get('service')}`,
+            `Preferred Date: ${formData.get('preferred_date')}`,
+            `Preferred Time: ${formData.get('preferred_time')}`,
+            `Urgency: ${formData.get('urgency')}`,
+            `Best Contact Method: ${formData.get('preferred_contact')}`,
+            `Issue Description: ${formData.get('issue_description')}`
+          ].join('\n');
+          const whatsappUrl = `https://wa.me/2348158115339?text=${encodeURIComponent(message)}`;
+          const whatsappWindow = window.open(whatsappUrl, '_blank');
 
-          if (!response.ok) throw new Error('Form submission failed');
+          if (!whatsappWindow) {
+            throw new Error('WhatsApp could not be opened. Allow pop-ups and try again.');
+          }
 
+          whatsappWindow.opener = null;
           appointmentForm.reset();
-          appointmentStatus.textContent = 'Thank you. Your "Tech visit" request has been sent. We will contact you shortly to confirm the appointment.';
+          appointmentStatus.textContent = 'WhatsApp opened with your appointment details. Tap Send in WhatsApp to submit your request.';
           appointmentStatus.className = 'appointment-status is-visible is-success';
         } catch (error) {
-          appointmentStatus.textContent = 'We could not send your request. Please try again or contact us on WhatsApp.';
+          appointmentStatus.textContent = `${error.message} Your details are still here.`;
           appointmentStatus.className = 'appointment-status is-visible is-error';
         } finally {
           submitButton.disabled = false;

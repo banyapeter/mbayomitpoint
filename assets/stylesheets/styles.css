@@ -428,6 +428,10 @@ img:hover {
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
+html.preloader-active {
+  overflow: hidden;
+}
+
 #preloader {
   position: fixed;
   inset: 0;
@@ -458,18 +462,20 @@ img:hover {
 }
 
 #preloader:after {
-  content: "MBAYOM IT-POINT\A Loading your digital experience";
+  content: "MBAYOM IT-POINT\A Business Solutions";
   position: relative;
   z-index: 1;
-  width: 210px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
   padding-top: 2px;
   color: #fff;
   text-align: center;
-  white-space: pre;
-  font-size: 17px;
+  white-space: pre-wrap;
+  font-size: clamp(12px, 4vw, 17px);
   font-weight: 700;
-  line-height: 1.8;
-  letter-spacing: 0.13em;
+  line-height: 1.6;
+  letter-spacing: clamp(0.04em, 0.5vw, 0.13em);
   text-shadow: 0 2px 18px rgb(0 0 0 / 45%);
   animation: preloader-copy 1.8s ease-in-out infinite;
 }
